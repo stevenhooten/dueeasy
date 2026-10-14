@@ -154,6 +154,7 @@
       <a href="#matcher">Step 4: Bill vs EOB matcher</a>
       <a href="#gfe">Step 5: Estimate checker</a>
       <a href="#wall">Step 6: If you hit a wall</a>
+      <a href="#bills">My bills tracker</a>
     </nav>
   </div>
 </header>
@@ -331,6 +332,32 @@
     </ul>
   </section>
 
+  <section class="card" id="bills">
+    <h2>My bills tracker</h2>
+    <p class="sub">Save each bill here and mark where it stands, so nothing sits in a drawer forgotten. The list lives only in this browser on this device, the same as everything else on this page. Nothing is uploaded.</p>
+    <div class="grid">
+      <div><label for="b-provider">Hospital or provider</label><input id="b-provider" placeholder="Example: St. Augustine Imaging"></div>
+      <div><label for="b-amount">Amount the bill asks for ($)</label><input id="b-amount" type="number" min="0" step="0.01" placeholder="Example: 2945"></div>
+      <div><label for="b-status">Where this bill stands</label>
+        <select id="b-status">
+          <option>Just got it</option>
+          <option>Checking the bill</option>
+          <option>Appeal sent</option>
+          <option>Waiting on a decision</option>
+          <option>Asked for financial assistance</option>
+          <option>Negotiating with billing</option>
+          <option>Done: paid</option>
+          <option>Done: not owed</option>
+        </select></div>
+      <div><label for="b-deadline">Deadline to watch (if any)</label><input id="b-deadline" type="date"></div>
+      <div><label for="b-note">Note to yourself (optional)</label><input id="b-note" placeholder="Example: EOB says patient owes 492"></div>
+    </div>
+    <div class="btnrow"><button type="button" onclick="addBill()">Save this bill</button></div>
+    <div id="bills-summary" class="result info" style="display:none"></div>
+    <div id="bills-list"></div>
+    <p class="small">Tip: when a step on this page gives you a deadline, copy that date into the bill here. Erase everything (in Step 3) clears this list too.</p>
+  </section>
+
   <section class="card" id="feedback">
     <h2>Tell us what worked</h2>
     <p class="sub">DueEasy is new and free. Two minutes of feedback shapes what gets fixed next.</p>
@@ -340,7 +367,7 @@
 
 </main>
 <footer>
-  <div class="wrap">DueEasy. General information only, not legal or medical advice. Rules and deadlines vary by plan and state. Verify yours against your denial letter and plan documents. <a href="privacy.html" style="color:#0a5e5d">Privacy policy</a>: nothing you type is sent anywhere. We count visits and letter generations anonymously, counts only, never content.</div>
+  <div class="wrap">DueEasy. General information only, not legal or medical advice. Rules and deadlines vary by plan and state. Verify yours against your denial letter and plan documents. <a href="privacy.html" style="color:#0a5e5d">Privacy policy</a>: nothing you type is sent anywhere. We count visits and feature use anonymously, counts only, never content.</div>
 </footer>
 
 <script>
@@ -521,12 +548,46 @@ function buildNegotiation(){
   document.getElementById("negotiation-out").textContent=lines.join("\n");
 }
 var FIELDS=["f-name","f-insurer","f-member","f-claim","f-provider","f-service","f-dos","f-denial-date","f-plan","f-reason","f-facts","f-deadline","hh-size","hh-income"];
+var BILL_STATUSES=["Just got it","Checking the bill","Appeal sent","Waiting on a decision","Asked for financial assistance","Negotiating with billing","Done: paid","Done: not owed"];
+function loadBills(){ try{ return JSON.parse(localStorage.getItem("dueeasyBillsV1")||"[]"); }catch(e){ return []; } }
+function storeBills(b){ try{ localStorage.setItem("dueeasyBillsV1", JSON.stringify(b)); }catch(e){} }
+function addBill(){
+  var prov=val("b-provider"); var amt=parseFloat(val("b-amount"))||0;
+  if(!prov && !amt){ alert("Add at least the provider or the amount first."); return; }
+  var b=loadBills();
+  b.unshift({id:Date.now(), provider:prov||"[Provider]", amount:amt, status:val("b-status")||"Just got it", deadline:val("b-deadline"), note:val("b-note")});
+  storeBills(b); countEvent("bill-saved"); renderBills();
+  document.getElementById("b-provider").value=""; document.getElementById("b-amount").value=""; document.getElementById("b-deadline").value=""; document.getElementById("b-note").value="";
+}
+function setBillStatus(id, st){ var b=loadBills(); for(var i=0;i<b.length;i++){ if(b[i].id===id){ b[i].status=st; } } storeBills(b); renderBills(); }
+function deleteBill(id){ var b=loadBills(); b=b.filter(function(x){ return x.id!==id; }); storeBills(b); renderBills(); }
+function renderBills(){
+  var b=loadBills(); var list=document.getElementById("bills-list"); var sum=document.getElementById("bills-summary");
+  if(!b.length){ list.innerHTML='<p class="small">No bills saved yet. Add the first one above.</p>'; sum.style.display="none"; return; }
+  var open=0, openCount=0;
+  var html="";
+  b.forEach(function(x){
+    var done=x.status.indexOf("Done:")===0;
+    if(!done){ open+=Number(x.amount||0); openCount++; }
+    var opts=BILL_STATUSES.map(function(st){ return '<option'+(st===x.status?' selected':'')+'>'+st+'</option>'; }).join("");
+    html+='<div class="card" style="box-shadow:none;margin:10px 0;padding:14px 16px">'
+      +'<div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><b>'+x.provider+'</b><span>'+money(x.amount)+'</span></div>'
+      +(x.deadline?'<div class="small">Deadline to watch: <b>'+fmtDate(x.deadline)+'</b></div>':'')
+      +(x.note?'<div class="small">'+x.note+'</div>':'')
+      +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;align-items:center"><select onchange="setBillStatus('+x.id+', this.value)">'+opts+'</select>'
+      +'<button type="button" class="ghost" onclick="deleteBill('+x.id+')">Remove</button></div></div>';
+  });
+  list.innerHTML=html;
+  sum.style.display="block";
+  sum.innerHTML="<b>"+b.length+" bill"+(b.length===1?"":"s")+" tracked.</b> Still open: "+openCount+" totaling "+money(open)+".";
+}
+if(document.getElementById('bills-list')){ renderBills(); }
 function saveLocal(){
   var data={}; FIELDS.forEach(function(id){ data[id]=val(id); });
   try{ localStorage.setItem("byp-appeal",JSON.stringify(data)); alert("Saved in this browser, on this device only."); }catch(e){ alert("Saving is not available in this browser."); }
 }
 function clearLocal(){
-  try{ localStorage.removeItem("byp-appeal"); }catch(e){}
+  try{ localStorage.removeItem("byp-appeal");  try{ localStorage.removeItem("dueeasyBillsV1"); }catch(e){} if(document.getElementById("bills-list")){ renderBills(); } }catch(e){}
   FIELDS.forEach(function(id){ document.getElementById(id).value=""; });
   document.getElementById("letter").textContent="Your letter will appear here.";
   document.getElementById("checklist").textContent="Your checklist will appear here after you build your packet.";
