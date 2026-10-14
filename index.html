@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Before You Pay: Denial Appeal Builder</title>
+<style>
+  :root{--navy:#12355b;--teal:#0e7c7b;--teal-dark:#0a5e5d;--bg:#f4f7f9;--card:#ffffff;--ink:#1c2733;--muted:#5a6b7a;--line:#d7e0e7;--warn:#9a5b00;--warnbg:#fff4e0;--good:#14663c;--goodbg:#e6f4ec;--radius:14px}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+  header{background:var(--navy);color:#fff;padding:34px 18px 30px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 16px}
+  header h1{margin:0 0 8px;font-size:32px;line-height:1.15}
+  header p{margin:0;max-width:680px;color:#d6e4f0;font-size:17px}
+  .badge{display:inline-block;background:var(--teal);color:#fff;padding:3px 10px;border-radius:999px;font-size:13px;font-weight:600;margin-bottom:12px}
+  nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 0}
+  nav a{color:#fff;text-decoration:none;border:1px solid #ffffff55;padding:7px 13px;border-radius:999px;font-size:14px;min-height:40px;display:inline-flex;align-items:center}
+  main{padding:24px 0 10px}
+  section{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin:0 0 20px}
+  h2{margin:0 0 6px;font-size:23px;color:var(--navy)}
+  h3{margin:18px 0 6px;font-size:17px;color:var(--navy)}
+  .sub{color:var(--muted);margin:0 0 14px}
+  label{display:block;font-weight:600;font-size:14px;margin:12px 0 5px}
+  input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;font-size:16px;background:#fff;color:var(--ink)}
+  textarea{min-height:84px;resize:vertical}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}header h1{font-size:27px}}
+  .check{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border:1px solid var(--line);border-radius:9px;margin:0 0 10px;font-weight:500}
+  .check input{width:20px;height:20px;margin-top:2px;flex:none}
+  button{background:var(--teal);color:#fff;border:0;border-radius:9px;padding:13px 20px;font-size:16px;font-weight:700;cursor:pointer;min-height:48px}
+  button:hover{background:var(--teal-dark)}
+  button.secondary{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+  .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .result{border-radius:10px;padding:14px 16px;margin-top:14px;display:none}
+  .result.show{display:block}
+  .result.warn{background:var(--warnbg);border:1px solid #e8c98a;color:#5e3d05}
+  .result.good{background:var(--goodbg);border:1px solid #a9d3ba;color:#0d4023}
+  .result.info{background:#eaf2f8;border:1px solid #bcd2e5;color:#173d5c}
+  .result ul{margin:8px 0 0;padding-left:20px}
+  pre{white-space:pre-wrap;word-wrap:break-word;background:#fbfdfe;border:1px solid var(--line);border-radius:10px;padding:16px;font-size:14.5px;line-height:1.6;min-height:120px}
+  .small{font-size:13.5px;color:var(--muted)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+  @media(max-width:640px){.steps{grid-template-columns:1fr}}
+  .step{border:1px solid var(--line);border-radius:10px;padding:14px}
+  .step b{color:var(--teal-dark)}
+  footer{padding:8px 0 40px;color:var(--muted);font-size:13.5px}
+  .pill{display:inline-block;background:#eaf2f8;color:var(--navy);border-radius:999px;padding:2px 10px;font-size:13px;font-weight:600;margin-right:6px}
+  .mrow{display:grid;grid-template-columns:0.8fr 1.4fr 1fr 1fr 1fr 1fr auto;gap:8px;align-items:end;border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:10px}
+  .mrow label{margin:0 0 4px;font-size:12.5px}
+  .mrow .rm{background:#fff;color:#8a2b1d;border:1px solid #c96a5a;border-radius:8px;padding:10px 12px;font-size:14px;min-height:44px}
+  @media(max-width:760px){.mrow{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="badge">Free tool. Runs on your device, nothing is uploaded.</span>
+    <h1>Before You Pay</h1>
+    <p>Your insurance denied a claim or a treatment your doctor ordered. Before you pay that bill or give up on the care, check three things and build your appeal here. Everything runs on your device. Nothing you type is sent anywhere.</p>
+    <nav>
+      <a href="#triage">Step 1: Triage</a>
+      <a href="#assistance">Step 2: Assistance check</a>
+      <a href="#appeal">Step 3: Build your appeal</a>
+      <a href="#matcher">Step 4: Bill vs EOB matcher</a>
+      <a href="#gfe">Step 5: Estimate checker</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section>
+    <h2>How this works</h2>
+    <div class="steps">
+      <div class="step"><b>1. Triage.</b><br>Answer five questions. Get the right first move for your situation, in the right order.</div>
+      <div class="step"><b>2. Assistance check.</b><br>See if your income may qualify you for hospital financial assistance before you pay anything.</div>
+      <div class="step"><b>3. Appeal builder.</b><br>Enter the facts from your denial letter. Get a finished appeal letter, a records checklist, and your deadline.</div>
+      <div class="step"><b>4. Bill vs EOB matcher.</b><br>Line up every charge on the bill against the EOB. Flags duplicates and amounts that do not match, then drafts the call script.</div>
+      <div class="step"><b>5. Estimate checker.</b><br>No insurance, or paying yourself? Compare your final bill to your Good Faith Estimate and see if you can dispute the gap.</div>
+    </div>
+    <p class="small" style="margin-top:14px">This tool gives general information and document help. It is not legal advice and not medical advice. Your denial letter and your plan documents control your exact rights and deadlines.</p>
+  </section>
+
+  <section id="triage">
+    <h2>Step 1: Do you owe this bill at all?</h2>
+    <p class="sub">Check anything that sounds like your situation.</p>
+    <label class="check"><input type="checkbox" id="t-denied"> Insurance denied my claim, or denied a treatment my doctor ordered</label>
+    <label class="check"><input type="checkbox" id="t-er"> It was emergency care, or a doctor I did not choose treated me at a hospital in my network</label>
+    <label class="check"><input type="checkbox" id="t-gfe"> I had no insurance or paid for myself, and I got a written cost estimate before the care</label>
+    <label class="check"><input type="checkbox" id="t-mismatch"> The bill says I owe more than my Explanation of Benefits says I owe</label>
+    <label class="check"><input type="checkbox" id="t-hardship"> Paying this bill would be a real financial hardship for my household</label>
+    <div class="btnrow"><button type="button" onclick="runTriage()">Show my first moves</button></div>
+    <div id="triage-result" class="result info"></div>
+  </section>
+
+  <section id="assistance">
+    <h2>Step 2: Could the hospital write some of this off?</h2>
+    <p class="sub">Nonprofit hospitals must have a financial assistance policy. Many patients who qualify never apply. This check uses the 2026 federal poverty guidelines for the 48 contiguous states and DC. Each hospital sets its own income limits, often between 200 and 300 percent of the poverty level, so treat this as a strong signal, not a guarantee.</p>
+    <div class="grid">
+      <div>
+        <label for="hh-size">People in your household</label>
+        <select id="hh-size">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4" selected>4</option><option value="5">5</option><option value="6">6</option>
+          <option value="7">7</option><option value="8">8</option><option value="9">9 or more</option>
+        </select>
+      </div>
+      <div>
+        <label for="hh-income">Household income per year, before taxes</label>
+        <input id="hh-income" type="number" min="0" step="100" placeholder="Example: 52000">
+      </div>
+    </div>
+    <div class="btnrow"><button type="button" onclick="runAssistance()">Check my range</button></div>
+    <div id="assistance-result" class="result info"></div>
+  </section>
+
+  <section id="appeal">
+    <h2>Step 3: Build your appeal</h2>
+    <p class="sub">Copy the facts from your denial letter. For most private plans you have 180 days from the denial notice to file an internal appeal, but your letter is the source that counts, so enter the deadline your letter gives you if it lists one.</p>
+    <div class="btnrow" style="margin:0 0 8px"><button type="button" class="secondary" onclick="loadSample()">Load the sample case (Jordan Smith)</button></div>
+    <div class="grid">
+      <div><label for="f-name">Your full name</label><input id="f-name" placeholder="Jordan Smith"></div>
+      <div><label for="f-insurer">Insurance company</label><input id="f-insurer" placeholder="Example: Blue Cross"></div>
+      <div><label for="f-member">Member ID</label><input id="f-member" placeholder="From your insurance card"></div>
+      <div><label for="f-claim">Claim number or denial reference</label><input id="f-claim" placeholder="From the denial letter"></div>
+      <div><label for="f-provider">Doctor or facility</label><input id="f-provider" placeholder="Who provided or ordered the care"></div>
+      <div><label for="f-service">Service or treatment denied</label><input id="f-service" placeholder="Example: MRI of the lower back"></div>
+      <div><label for="f-dos">Date of service, or date care was requested</label><input id="f-dos" type="date"></div>
+      <div><label for="f-denial-date">Date on the denial letter</label><input id="f-denial-date" type="date" onchange="calcDeadline()"></div>
+      <div>
+        <label for="f-plan">Plan type</label>
+        <select id="f-plan">
+          <option value="private">Private or job based plan</option>
+          <option value="marketplace">Marketplace plan</option>
+          <option value="medicareadv">Medicare Advantage</option>
+          <option value="medicaid">Medicaid managed care</option>
+          <option value="other">Other or not sure</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-reason">Why did they say no?</label>
+        <select id="f-reason">
+          <option value="mednec">Not medically necessary</option>
+          <option value="noauth">No prior authorization</option>
+          <option value="coding">Coding or billing error</option>
+          <option value="notcovered">Service not covered by my plan</option>
+          <option value="oon">Out of network</option>
+          <option value="other">Another reason</option>
+        </select>
+      </div>
+    </div>
+    <label for="f-facts">Anything specific that supports your case, in your own words (optional)</label>
+    <textarea id="f-facts" placeholder="Example: I already tried 8 weeks of physical therapy and my symptoms got worse. My doctor documented this on March 3."></textarea>
+    <label for="f-deadline">Deadline on your denial letter (optional)</label>
+    <input id="f-deadline" type="date" onchange="calcDeadline()">
+    <div id="deadline-result" class="result warn"></div>
+    <div class="btnrow">
+      <button type="button" onclick="buildLetter()">Build my appeal packet</button>
+      <button type="button" class="secondary" onclick="saveLocal()">Save on this device</button>
+      <button type="button" class="secondary" onclick="clearLocal()">Erase everything</button>
+    </div>
+    <h3>Your appeal letter</h3>
+    <pre id="letter">Your letter will appear here.</pre>
+    <h3>Records checklist: send these with your appeal</h3>
+    <div id="checklist" class="small">Your checklist will appear here after you build your packet.</div>
+    <div class="btnrow">
+      <button type="button" class="secondary" onclick="copyLetter()">Copy letter</button>
+      <button type="button" class="secondary" onclick="downloadLetter()">Download letter (.txt)</button>
+      <button type="button" class="secondary" onclick="window.print()">Print</button>
+    </div>
+    <p class="small" style="margin-top:12px">Privacy: this page stores information only in your own browser if you tap Save on this device. Nothing is uploaded. Erase everything removes the saved copy. If your insurer still says no after your internal appeal, you generally have the right to an external review by an independent reviewer. Your denial letter and your state department of insurance can tell you how to file. The No Surprises Help Desk is 1-800-985-3059.</p>
+  </section>
+
+  <section id="matcher">
+    <h2>Step 4: Bill vs EOB matcher</h2>
+    <p class="sub">Add one row for each line on the bill. The EOB amount is what your insurance says you owe for that line. If the bill asks for more, that difference is your first dispute. Rows with the same code, same date, and same billed amount get flagged as possible duplicates.</p>
+    <div id="match-rows"></div>
+    <div class="btnrow">
+      <button type="button" class="secondary" onclick="addMatchRow()">Add a bill line</button>
+      <button type="button" class="secondary" onclick="loadMatchSample()">Load sample lines</button>
+      <button type="button" onclick="runMatcher()">Check my bill</button>
+    </div>
+    <div id="match-result" class="result info"></div>
+    <h3>Provider call script</h3>
+    <pre id="match-script">Your call script will appear here after you check the bill.</pre>
+    <div class="btnrow"><button type="button" class="secondary" onclick="copyScript()">Copy script</button></div>
+  </section>
+
+  <section id="gfe">
+    <h2>Step 5: Good Faith Estimate checker</h2>
+    <p class="sub">For patients with no insurance, or who chose to pay for themselves. If your final bill from a provider is at least $400 more than that provider's written Good Faith Estimate, federal rules generally let you dispute the bill through the patient provider dispute process, within 120 days of the first bill. Keep both documents, they are the whole case.</p>
+    <div class="grid">
+      <div><label for="g-provider">Provider or facility</label><input id="g-provider" placeholder="Example: North Florida Surgery Center"></div>
+      <div><label for="g-estimate">Good Faith Estimate amount ($)</label><input id="g-estimate" type="number" min="0" step="0.01" placeholder="Example: 1800"></div>
+      <div><label for="g-bill">Final bill amount ($)</label><input id="g-bill" type="number" min="0" step="0.01" placeholder="Example: 2650"></div>
+      <div><label for="g-billdate">Date of the first bill</label><input id="g-billdate" type="date"></div>
+    </div>
+    <div class="btnrow"><button type="button" onclick="runGFE()">Check the gap</button></div>
+    <div id="gfe-result" class="result info"></div>
+  </section>
+
+</main>
+<footer>
+  <div class="wrap">Before You Pay. General information only, not legal or medical advice. Rules and deadlines vary by plan and state. Verify yours against your denial letter and plan documents. <a href="privacy.html" style="color:#0a5e5d">Privacy policy</a>: nothing you type is sent anywhere.</div>
+</footer>
+
+<script>
+var REASONS = {
+  mednec: {
+    para: "The denial states the service was not medically necessary. I am requesting a full and fair review. I have asked the treating provider to supply the clinical records that support this service, including office notes, prior treatment history, and the reasons alternatives were not sufficient. Please identify the specific clinical criteria you applied, the credentials of the reviewer who made this decision, and every record you relied on.",
+    list: ["A letter from your treating doctor explaining why this care is needed, with dates and prior treatments tried", "Office visit notes and test results that support the request", "A copy of the denial letter", "Your plan page or policy section that covers this type of care, if you have it"]
+  },
+  noauth: {
+    para: "The denial states that prior authorization was not obtained. I am requesting a full and fair review, including whether authorization was requested by the provider, whether the service was urgent, and whether retroactive authorization is available under my plan. Please provide the authorization records you hold for this date of service, including any request submitted by the provider and your response to it.",
+    list: ["Any authorization request or confirmation from the provider office, with dates", "Notes from your calls with the insurer: date, time, and the name of each person you spoke with", "Proof the care was urgent, if it was, such as ER records", "A copy of the denial letter"]
+  },
+  coding: {
+    para: "The denial appears to rest on a coding or billing error. I am requesting a full and fair review and a corrected claim review once the provider resubmits with accurate codes and records. Please state the exact code, modifier, or documentation problem you found, so the provider can correct the specific issue rather than resubmit blindly.",
+    list: ["The itemized bill with codes, from the provider billing office", "A corrected claim or a note from the provider billing office describing the fix", "Your EOB for this claim", "A copy of the denial letter"]
+  },
+  notcovered: {
+    para: "The denial states the service is not covered. I am requesting a full and fair review. Please cite the exact plan provision you relied on, and provide a copy of that provision. If the plan treats this service differently depending on diagnosis or setting, please explain which facts in my claim drove the exclusion and what documentation would change the outcome.",
+    list: ["The plan benefit booklet section the insurer cited, once they send it", "A letter from your doctor describing the diagnosis and why this service was ordered", "Any similar service your plan has covered for you before, with dates", "A copy of the denial letter"]
+  },
+  oon: {
+    para: "The denial or reduced payment rests on out of network status. I am requesting a full and fair review, including whether the No Surprises Act applies. That law generally limits patient cost sharing to in network amounts for emergency care and for providers a patient did not choose at an in network facility. Please state whether you applied those protections, and if not, the specific reason they do not apply to this claim.",
+    list: ["Your EOB and the provider bill, showing the amounts side by side", "Proof the facility was in network, such as a screenshot or plan directory page", "Any notice and consent form the insurer claims you signed, or a note that you never signed one", "A copy of the denial letter"]
+  },
+  other: {
+    para: "I am requesting a full and fair review of this denial. Please provide the specific reason for the denial in writing, the plan provisions and criteria you applied, the records you relied on, and the name and credentials of the person who made this decision, so I can respond to the actual basis for the denial.",
+    list: ["A copy of the denial letter", "Your EOB for this claim", "Records from your doctor that relate to this service", "Notes from every call with the insurer: date, time, and the name of each person you spoke with"]
+  }
+};
+
+function val(id){return document.getElementById(id).value.trim();}
+function fmtDate(iso){ if(!iso) return ""; var d=new Date(iso+"T12:00:00"); return d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); }
+
+function runTriage(){
+  var out=[];
+  if(document.getElementById("t-denied").checked){ out.push("<li><b>Appeal the denial.</b> Most people never appeal, and appealed denials are overturned often enough that filing is always worth it. Go to Step 3 and build your packet now, and note your deadline.</li>"); }
+  if(document.getElementById("t-er").checked){ out.push("<li><b>Check No Surprises Act protection.</b> For emergency care, and for providers you did not choose at an in network facility, federal law generally caps what you owe at your in network cost sharing. Ask the insurer to reprocess the claim under those protections, and call the No Surprises Help Desk at 1-800-985-3059 if they refuse.</li>"); }
+  if(document.getElementById("t-gfe").checked){ out.push("<li><b>Compare the bill to your Good Faith Estimate.</b> If the final bill is at least $400 higher than the estimate for that provider, you can use the federal patient provider dispute process. You generally have 120 days from the first bill. Keep the estimate, it is your key document.</li>"); }
+  if(document.getElementById("t-mismatch").checked){ out.push("<li><b>Do not pay the difference yet.</b> The amount your EOB lists as patient responsibility is what you should owe. Ask the provider billing office to match the bill to the EOB, in writing, before you pay.</li>"); }
+  if(document.getElementById("t-hardship").checked){ out.push("<li><b>Run the assistance check in Step 2 before you pay.</b> A financial assistance write off or discount beats any payment plan.</li>"); }
+  var box=document.getElementById("triage-result");
+  if(out.length===0){ box.className="result warn show"; box.innerHTML="<b>Nothing checked.</b> If none of these fit, your next step is to request an itemized bill and your EOB, then compare them line by line before paying."; return; }
+  box.className="result good show"; box.innerHTML="<b>Your first moves, in order:</b><ul>"+out.join("")+"</ul>";
+}
+
+function runAssistance(){
+  var size=parseInt(val("hh-size"),10)||1;
+  var income=parseFloat(val("hh-income"));
+  var box=document.getElementById("assistance-result");
+  if(isNaN(income)){ box.className="result warn show"; box.innerHTML="<b>Enter your household income</b> so the check can run."; return; }
+  var base=15960+(size-1)*5680;
+  var pct=Math.round(income/base*100);
+  var msg="";
+  if(pct<=200){ msg="<b>Strong signal: your income is about "+pct+" percent of the 2026 federal poverty level.</b> Many nonprofit hospitals give full financial assistance at or below 200 percent. Ask the hospital billing office for its financial assistance policy and application today, and tell them not to send the account to collections while your application is pending."; }
+  else if(pct<=300){ msg="<b>Real chance: your income is about "+pct+" percent of the 2026 federal poverty level.</b> Many nonprofit hospitals give partial discounts between 200 and 300 percent. Ask for the financial assistance policy and application, and apply even if you are insured. Underinsured patients qualify at many hospitals."; }
+  else { msg="<b>Your income is about "+pct+" percent of the 2026 federal poverty level.</b> That is above the range most hospitals use for income based assistance. Still ask for two things: an itemized bill review, and a prompt pay or hardship discount. Hospitals grant exceptions that never appear on a website."; }
+  box.className="result good show"; box.innerHTML=msg+"<br><span class='small'>Math shown: poverty level for a household of "+size+" is $"+base.toLocaleString()+" under the 2026 HHS guidelines for the 48 contiguous states and DC. Alaska and Hawaii use higher amounts.</span>";
+}
+
+function calcDeadline(){
+  var letterDate=val("f-deadline");
+  var denialDate=val("f-denial-date");
+  var box=document.getElementById("deadline-result");
+  var target=null;
+  if(letterDate){ target=new Date(letterDate+"T12:00:00"); }
+  else if(denialDate && document.getElementById("f-plan").value!=="medicareadv"){ target=new Date(denialDate+"T12:00:00"); target.setDate(target.getDate()+180); }
+  if(!target){ box.className="result warn"; box.innerHTML=""; return; }
+  var today=new Date(); today.setHours(12,0,0,0);
+  var days=Math.ceil((target-today)/86400000);
+  box.className="result warn show";
+  if(days<0){ box.innerHTML="<b>That deadline has passed on paper.</b> Call the insurer and your state department of insurance today anyway. Late appeals are sometimes accepted for good cause, and external review rights may still be open."; }
+  else { box.innerHTML="<b>Your appeal deadline target: "+target.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})+"</b>, about "+days+" days from today. File well before this date and keep proof of delivery."+(letterDate?"":" This date uses the common 180 day internal appeal window from your denial date. Your denial letter controls if it gives a different date."); }
+}
+
+function buildLetter(){
+  var r=REASONS[val("f-reason")||"other"];
+  var today=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+  var lines=[];
+  lines.push(today);
+  lines.push("");
+  lines.push("To: "+(val("f-insurer")||"[Insurance company]")+", Claims Appeals Department");
+  lines.push("From: "+(val("f-name")||"[Your name]"));
+  lines.push("Member ID: "+(val("f-member")||"[Member ID]"));
+  lines.push("Claim or denial reference: "+(val("f-claim")||"[Claim number]"));
+  lines.push("Provider: "+(val("f-provider")||"[Provider]"));
+  lines.push("Service: "+(val("f-service")||"[Service]"));
+  if(val("f-dos")) lines.push("Date of service: "+fmtDate(val("f-dos")));
+  if(val("f-denial-date")) lines.push("Denial date: "+fmtDate(val("f-denial-date")));
+  lines.push("");
+  lines.push("Subject: Request for internal appeal and full and fair review");
+  lines.push("");
+  lines.push("Dear Appeals Department,");
+  lines.push("");
+  lines.push("I am appealing the denial listed above and asking for a full and fair review of this decision.");
+  lines.push("");
+  lines.push(r.para);
+  if(val("f-facts")){ lines.push(""); lines.push("Facts I want considered in this review: "+val("f-facts")); }
+  lines.push("");
+  lines.push("Please send me, free of charge, a copy of the documents and criteria relied on in this denial, and written notice of your decision and of my external review rights if the denial stands.");
+  lines.push("");
+  lines.push("Thank you for your time. Please contact me if anything further is needed to process this appeal before my deadline.");
+  lines.push("");
+  lines.push("Sincerely,");
+  lines.push(val("f-name")||"[Your name]");
+  document.getElementById("letter").textContent=lines.join("\n");
+  var list=r.list.map(function(i){return "<li>"+i+"</li>";}).join("");
+  document.getElementById("checklist").innerHTML="<ul style='margin:6px 0;padding-left:20px'>"+list+"</ul><p class='small'>Keep a copy of everything you send, and send the appeal in a way that gives you proof of delivery.</p>";
+  calcDeadline();
+}
+
+function letterText(){ return document.getElementById("letter").textContent; }
+function copyLetter(){
+  var t=letterText();
+  if(navigator.clipboard){ navigator.clipboard.writeText(t).then(function(){ alert("Letter copied."); }); }
+  else { alert("Copy is not available in this browser. Select the letter text and copy it manually."); }
+}
+function downloadLetter(){
+  var blob=new Blob([letterText()],{type:"text/plain"});
+  var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="appeal-letter.txt"; a.click(); URL.revokeObjectURL(a.href);
+}
+var FIELDS=["f-name","f-insurer","f-member","f-claim","f-provider","f-service","f-dos","f-denial-date","f-plan","f-reason","f-facts","f-deadline","hh-size","hh-income"];
+function saveLocal(){
+  var data={}; FIELDS.forEach(function(id){ data[id]=val(id); });
+  try{ localStorage.setItem("byp-appeal",JSON.stringify(data)); alert("Saved in this browser, on this device only."); }catch(e){ alert("Saving is not available in this browser."); }
+}
+function clearLocal(){
+  try{ localStorage.removeItem("byp-appeal"); }catch(e){}
+  FIELDS.forEach(function(id){ document.getElementById(id).value=""; });
+  document.getElementById("letter").textContent="Your letter will appear here.";
+  document.getElementById("checklist").textContent="Your checklist will appear here after you build your packet.";
+  alert("Erased.");
+}
+function loadSample(){
+  document.getElementById("f-name").value="Jordan Smith";
+  document.getElementById("f-insurer").value="Blue Cross";
+  document.getElementById("f-member").value="TEST123";
+  document.getElementById("f-claim").value="CLM998877";
+  document.getElementById("f-provider").value="St. Augustine Imaging";
+  document.getElementById("f-service").value="MRI of the lower back";
+  document.getElementById("f-dos").value="2026-09-20";
+  document.getElementById("f-denial-date").value="2026-10-01";
+  document.getElementById("f-plan").value="private";
+  document.getElementById("f-reason").value="mednec";
+  document.getElementById("f-facts").value="I did 8 weeks of physical therapy first and my pain got worse. My doctor documented this in my chart.";
+  document.getElementById("f-deadline").value="";
+  buildLetter();
+  document.getElementById("appeal").scrollIntoView({behavior:"smooth"});
+}
+
+function money(n){ return "$"+Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+function addMatchRow(data){
+  data=data||{};
+  var wrap=document.getElementById("match-rows");
+  var row=document.createElement("div"); row.className="mrow";
+  row.innerHTML=
+    "<div><label>Code</label><input class='m-code' placeholder='70551' value='"+(data.code||"")+"'></div>"+
+    "<div><label>What the line says</label><input class='m-desc' placeholder='MRI brain' value='"+(data.desc||"")+"'></div>"+
+    "<div><label>Date</label><input class='m-date' type='date' value='"+(data.date||"")+"'></div>"+
+    "<div><label>Billed ($)</label><input class='m-billed' type='number' min='0' step='0.01' value='"+(data.billed||"")+"'></div>"+
+    "<div><label>EOB: you owe ($)</label><input class='m-eob' type='number' min='0' step='0.01' value='"+(data.eob||"")+"'></div>"+
+    "<div><label>Bill: you owe ($)</label><input class='m-bill' type='number' min='0' step='0.01' value='"+(data.bill||"")+"'></div>"+
+    "<button type='button' class='rm' onclick='this.parentElement.remove()'>Remove</button>";
+  wrap.appendChild(row);
+}
+
+function loadMatchSample(){
+  document.getElementById("match-rows").innerHTML="";
+  addMatchRow({code:"70551",desc:"MRI brain without contrast",date:"2026-09-20",billed:"2400",eob:"450",bill:"450"});
+  addMatchRow({code:"70551",desc:"MRI brain without contrast",date:"2026-09-20",billed:"2400",eob:"0",bill:"2400"});
+  addMatchRow({code:"80053",desc:"Blood panel",date:"2026-09-20",billed:"310",eob:"42",bill:"95"});
+}
+
+function runMatcher(){
+  var rows=document.querySelectorAll("#match-rows .mrow");
+  var box=document.getElementById("match-result");
+  var script=document.getElementById("match-script");
+  if(rows.length===0){ box.className="result warn show"; box.innerHTML="<b>No lines yet.</b> Add at least one bill line, or load the sample lines."; return; }
+  var seen={}, flags=[], totBilled=0, totEOB=0, totBill=0, problems=0;
+  rows.forEach(function(r,i){
+    var code=r.querySelector(".m-code").value.trim();
+    var desc=r.querySelector(".m-desc").value.trim()||"line "+(i+1);
+    var date=r.querySelector(".m-date").value;
+    var billed=parseFloat(r.querySelector(".m-billed").value)||0;
+    var eob=parseFloat(r.querySelector(".m-eob").value)||0;
+    var bill=parseFloat(r.querySelector(".m-bill").value)||0;
+    totBilled+=billed; totEOB+=eob; totBill+=bill;
+    var key=(code+"|"+date+"|"+billed).toLowerCase();
+    if(code && seen[key]){ flags.push("<li><b>Possible duplicate on line "+(i+1)+":</b> code "+code+" on "+(date||"the same date")+" billed at "+money(billed)+" matches line "+seen[key]+". Ask the billing office to prove both lines were performed, or remove one.</li>"); problems++; }
+    else if(code){ seen[key]=i+1; }
+    if(bill>eob){ flags.push("<li><b>Line "+(i+1)+" ("+desc+") asks for more than the EOB:</b> bill says you owe "+money(bill)+", EOB says "+money(eob)+". Difference: "+money(bill-eob)+". The EOB amount is what you should owe for an in network claim.</li>"); problems++; }
+    if(billed>0 && eob===0 && bill===0){ flags.push("<li><b>Line "+(i+1)+" ("+desc+") is fully covered on the EOB.</b> Good, nothing owed. Keep the EOB in case a later bill asks for it.</li>"); }
+  });
+  var diff=totBill-totEOB;
+  var html="<b>Totals:</b> billed "+money(totBilled)+". Your EOB says you owe "+money(totEOB)+" in total. The bill asks you for "+money(totBill)+".";
+  if(diff>0){ html+="<br><b>Gap to dispute before paying: "+money(diff)+".</b>"; }
+  if(flags.length){ html+="<ul>"+flags.join("")+"</ul>"; }
+  else { html+="<br>No duplicate lines and no bill vs EOB gaps found in what you entered. That is a good sign, not a guarantee. Check the lines against what care you actually received."; }
+  box.className="result "+(problems>0?"warn":"good")+" show"; box.innerHTML=html;
+  var nm=val("f-name")||"a patient";
+  var lines=[];
+  lines.push("Phone script, provider billing office:");
+  lines.push("");
+  lines.push("\"Hi, my name is "+nm+". I am calling about my bill before I pay it. I compared it line by line with my Explanation of Benefits.");
+  if(diff>0){ lines.push("Your bill says I owe "+money(totBill)+", but my EOB says my patient responsibility is "+money(totEOB)+". That is a difference of "+money(diff)+"."); }
+  if(problems>0){ lines.push("I also found "+problems+" line problem"+(problems===1?"":"s")+", including possible duplicate or mismatched lines. I can read you the exact lines."); }
+  lines.push("Please correct the bill to match the EOB and send me an updated itemized bill. Please also note the account so it does not go to collections while this is being fixed, and give me a reference number for this call. Thank you.\"");
+  lines.push("");
+  lines.push("Write down: the name of the person you spoke with, the date and time, the reference number, and what they promised, with a date.");
+  script.textContent=lines.join("\n");
+}
+
+function copyScript(){
+  var t=document.getElementById("match-script").textContent;
+  if(navigator.clipboard){ navigator.clipboard.writeText(t).then(function(){ alert("Script copied."); }); }
+  else { alert("Copy is not available in this browser. Select the script text and copy it manually."); }
+}
+
+function runGFE(){
+  var est=parseFloat(val("g-estimate")), bill=parseFloat(val("g-bill")), bd=val("g-billdate"), prov=val("g-provider")||"the provider";
+  var box=document.getElementById("gfe-result");
+  if(isNaN(est)||isNaN(bill)){ box.className="result warn show"; box.innerHTML="<b>Enter both amounts</b> so the gap can be checked."; return; }
+  var gap=bill-est;
+  if(gap<400){
+    box.className="result info show";
+    box.innerHTML="<b>Gap: "+money(gap)+".</b> That is under the $400 federal dispute threshold, so the federal patient provider dispute process generally does not apply on these numbers. You can still ask "+prov+" to explain every line above the estimate and request a hardship or prompt pay discount.";
+    return;
+  }
+  var deadline=""; var daysTxt="";
+  if(bd){ var d=new Date(bd+"T12:00:00"); d.setDate(d.getDate()+120); deadline=d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); var today=new Date(); today.setHours(12,0,0,0); var days=Math.ceil((d-today)/86400000); daysTxt= days<0 ? " That date has passed on paper, so act today and ask about late filing for good cause." : " That is about "+days+" days from today. File early."; }
+  box.className="result good show";
+  box.innerHTML="<b>Gap: "+money(gap)+" above the estimate, which clears the $400 threshold.</b><br>Next steps: 1. Call "+prov+" billing and ask them to honor the estimate or explain the gap in writing. 2. If they will not fix it, start the federal patient provider dispute process. You generally have 120 days from the first bill."+(deadline?" Your 120 day target date: <b>"+deadline+"</b>."+daysTxt:"")+" 3. You will need the Good Faith Estimate, the itemized bill, and this first bill date. The No Surprises Help Desk, 1-800-985-3059, can walk you through filing. There is a small federal filing fee, refunded if you win.";
+}
+
+(function load(){
+  var raw=null; try{ raw=localStorage.getItem("byp-appeal"); }catch(e){}
+  if(!raw) return;
+  var data=JSON.parse(raw);
+  FIELDS.forEach(function(id){ if(data[id]) document.getElementById(id).value=data[id]; });
+})();
+if(document.querySelectorAll("#match-rows .mrow").length===0){ addMatchRow(); }
+</script>
+</body>
+</html>
