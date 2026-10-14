@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DueEasy: Check a Medical Bill Before You Pay It</title>
+<meta name="description" content="DueEasy checks a medical bill before you pay it: appeal a denial with a deadline calculator, screen for hospital financial assistance, match a bill against your EOB, and check a Good Faith Estimate. Free, no account, nothing you type leaves your device.">
+<link rel="canonical" href="https://dueeasy.com/">
+<meta property="og:title" content="DueEasy: Check a Medical Bill Before You Pay It">
+<meta property="og:description" content="Six free checks before you pay a medical bill. Appeal letters, assistance screening, bill matching. Nothing you type leaves your device.">
+<meta property="og:url" content="https://dueeasy.com/">
+<meta property="og:type" content="website">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"DueEasy","url":"https://dueeasy.com/","description":"Free tools to check a medical bill before you pay it: appeal letters with plan specific deadlines, hospital financial assistance screening, bill versus EOB matching, Good Faith Estimate checks, and a bill tracker. Runs entirely in the browser."}
+</script>
 <style>
   :root{
     --teal:#0e7c7b;--teal-dark:#0a5e5d;--teal-deep:#063f3e;--ink:#12212b;--muted:#5c6f7d;
@@ -366,6 +375,31 @@
   </section>
 
 </main>
+<section class="card" id="share">
+<h2>Know someone staring at a medical bill?</h2>
+<p class="sub">Send them the checker before they pay it. That is how this spreads, and it costs them nothing.</p>
+<div class="btnrow"><button type="button" onclick="copyDueEasyLink(this)">Copy the link: dueeasy.com</button>
+<a style="display:inline-flex;align-items:center;background:#fff;color:var(--teal-dark);border:1.5px solid #bcd6d4;border-radius:12px;padding:12px 20px;font-weight:700;font-size:16px;text-decoration:none" href="mailto:?subject=Check%20that%20medical%20bill%20before%20you%20pay%20it&body=This%20free%20site%20checks%20a%20medical%20bill%20before%20you%20pay%20it.%20Appeal%20letters%2C%20hospital%20assistance%20screening%2C%20bill%20matching.%20Nothing%20you%20type%20leaves%20your%20device%3A%20https%3A%2F%2Fdueeasy.com%2F">Email it to them</a></div>
+</section>
+<script>
+function copyDueEasyLink(btn){
+  var done = function(){ var t = btn.textContent; btn.textContent = "Copied. Send it to them."; setTimeout(function(){ btn.textContent = t; }, 2600); };
+  if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText("https://dueeasy.com/").then(done, done); }
+  else { window.prompt("Copy this link:", "https://dueeasy.com/"); }
+}
+</script>
+<section class="card" id="guides">
+<h2>Plain language guides</h2>
+<p class="sub">The short written version of each check, for reading and sharing.</p>
+<ul>
+<li><a href="appeal-letter-guide.html">How to appeal a denied health insurance claim</a>: deadlines by plan type and what to send.</li>
+<li><a href="hospital-financial-assistance.html">Hospital financial assistance</a>: the 2026 income table, the 240 day window, and how to apply.</li>
+<li><a href="good-faith-estimate-dispute.html">Good Faith Estimate disputes</a>: the $400 rule and the 120 day deadline.</li>
+<li><a href="surprise-bill-rights.html">Surprise bill rights</a>: what the No Surprises Act covers, and the ground ambulance gap.</li>
+<li><a href="medical-bill-negotiation.html">How to negotiate a medical bill</a>: the order that works, and what to say on the call.</li>
+<li><a href="bill-vs-eob.html">Bill vs. EOB</a>: how to match a bill to your insurance statement and find the errors.</li>
+</ul>
+</section>
 <footer>
   <div class="wrap">DueEasy. General information only, not legal or medical advice. Rules and deadlines vary by plan and state. Verify yours against your denial letter and plan documents. <a href="privacy.html" style="color:#0a5e5d">Privacy policy</a>: nothing you type is sent anywhere. We count visits and feature use anonymously, counts only, never content.</div>
 </footer>
