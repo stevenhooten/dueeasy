@@ -57,13 +57,14 @@
     <span class="badge">Free tool. Runs on your device, nothing is uploaded.</span>
     <h1>DueEasy</h1>
     <p class="tagline" style="font-size:19px;color:#0a5e5d;font-weight:600;margin:2px 0 8px">Check that medical bill before you pay it.</p>
-    <p>Your insurance denied a claim or a treatment your doctor ordered. Before you pay that bill or give up on the care, check five things and build your appeal here. Everything runs on your device. Nothing you type is sent anywhere.</p>
+    <p>Your insurance denied a claim or a treatment your doctor ordered. Before you pay that bill or give up on the care, run the checks below and build your appeal here. Everything runs on your device. Nothing you type is sent anywhere.</p>
     <nav>
       <a href="#triage">Step 1: Triage</a>
       <a href="#assistance">Step 2: Assistance check</a>
       <a href="#appeal">Step 3: Build your appeal</a>
       <a href="#matcher">Step 4: Bill vs EOB matcher</a>
       <a href="#gfe">Step 5: Estimate checker</a>
+      <a href="#wall">Step 6: If you hit a wall</a>
     </nav>
   </div>
 </header>
@@ -117,7 +118,7 @@
 
   <section id="appeal">
     <h2>Step 3: Build your appeal</h2>
-    <p class="sub">Copy the facts from your denial letter. For most private plans you have 180 days from the denial notice to file an internal appeal, but your letter is the source that counts, so enter the deadline your letter gives you if it lists one.</p>
+    <p class="sub">Copy the facts from your denial letter. For most private and Marketplace plans you have 180 days from the denial notice to file an internal appeal. Medicare and Medicaid use shorter windows, and the deadline calculator below adjusts for your plan type. Your letter is still the source that counts, so enter the deadline your letter gives you if it lists one.</p>
     <div class="btnrow" style="margin:0 0 8px"><button type="button" class="secondary" onclick="loadSample()">Load the sample case (Jordan Smith)</button></div>
     <div class="grid">
       <div><label for="f-name">Your full name</label><input id="f-name" placeholder="Jordan Smith"></div>
@@ -134,6 +135,7 @@
           <option value="private">Private or job based plan</option>
           <option value="marketplace">Marketplace plan</option>
           <option value="medicareadv">Medicare Advantage</option>
+          <option value="medicare">Original Medicare</option>
           <option value="medicaid">Medicaid managed care</option>
           <option value="other">Other or not sure</option>
         </select>
@@ -169,7 +171,7 @@
       <button type="button" class="secondary" onclick="downloadLetter()">Download letter (.txt)</button>
       <button type="button" class="secondary" onclick="window.print()">Print</button>
     </div>
-    <p class="small" style="margin-top:12px">Privacy: this page stores information only in your own browser if you tap Save on this device. Nothing is uploaded. Erase everything removes the saved copy. If your insurer still says no after your internal appeal, you generally have the right to an external review by an independent reviewer. Your denial letter and your state department of insurance can tell you how to file. The No Surprises Help Desk is 1-800-985-3059.</p>
+    <p class="small" style="margin-top:12px">Privacy: this page stores information only in your own browser if you tap Save on this device. Nothing is uploaded. Erase everything removes the saved copy. If your insurer still says no after your internal appeal, you generally have the right to an external review by an independent reviewer, and the reviewer's decision binds the plan. Under the federal standard you have 4 months from the final denial notice to request it, and some states set shorter windows, so do not sit on a final denial. Your denial letter and your state department of insurance can tell you how to file. The No Surprises Help Desk is 1-800-985-3059.</p>
   </section>
 
   <section id="matcher">
@@ -198,6 +200,46 @@
     </div>
     <div class="btnrow"><button type="button" onclick="runGFE()">Check the gap</button></div>
     <div id="gfe-result" class="result info"></div>
+  </section>
+
+  <section class="card" id="wall">
+    <h2>Step 6: If you hit a wall</h2>
+    <p class="sub">Three endgames for when the first moves do not work, plus the free human help that exists for each one. DueEasy cannot file anything for you, so this step hands you the exact next door to knock on.</p>
+
+    <h3 style="margin-top:18px">Your appeal was denied again: ask for external review</h3>
+    <p>After a final internal denial, most private and Marketplace plan members can ask for external review: an independent reviewer who does not work for your plan reads the case, and the decision binds the plan. In a four state study of these reviews, about 46 percent of denials were overturned. Almost nobody files, mostly because nobody tells them the right exists. Under the federal standard you have 4 months from the final denial notice to request it, and some states set shorter windows.</p>
+    <div class="grid">
+      <div><label for="x-final-date">Date on the final denial letter</label><input id="x-final-date" type="date"></div>
+    </div>
+    <div class="btnrow"><button type="button" onclick="calcExternal()">Calculate my external review deadline</button></div>
+    <div id="x-result" class="result info"></div>
+    <p class="small">How to file and what to send: <a href="https://www.healthcare.gov/appeal-insurance-company-decision/external-review/" target="_blank" rel="noopener">HealthCare.gov external review guide</a>. Send the final denial letter, your internal appeal and everything you attached to it, and your medical records for the service. If your case is a hard medical necessity fight, a free human case manager may beat any template: the Patient Advocate Foundation, 1-800-532-5274, takes denial cases for people with serious or chronic conditions.</p>
+
+    <h3 style="margin-top:22px">Stuck because you only have a summary bill: request the itemized bill</h3>
+    <p>Steps 1 and 4 need the itemized bill with codes, and most people are only ever mailed a summary. You have the right to the full itemized statement. Generate the request, then send it and keep proof.</p>
+    <div class="grid">
+      <div><label for="w-name">Your full name</label><input id="w-name" placeholder="Your name"></div>
+      <div><label for="w-provider">Hospital or provider billing office</label><input id="w-provider" placeholder="Example: St. Augustine Imaging"></div>
+      <div><label for="w-account">Account or statement number (if you have it)</label><input id="w-account" placeholder="From the summary bill"></div>
+    </div>
+    <div class="btnrow"><button type="button" onclick="buildItemized()">Generate the request letter</button> <button type="button" class="ghost" onclick="copyPre('itemized-out')">Copy letter</button></div>
+    <pre id="itemized-out">Your request letter will appear here.</pre>
+
+    <h3 style="margin-top:22px">The bill is valid but you cannot pay it: negotiate it</h3>
+    <p>If you owe the money and assistance does not apply, the number is still often negotiable. Advocates routinely see 30 to 40 percent off for a lump sum paid at once. Rules: never agree on the first call, ask for the hospital's own zero interest payment plan instead of a medical credit card, and get any agreement in writing before you pay a cent.</p>
+    <div class="grid">
+      <div><label for="w-amount">Bill amount you are negotiating ($)</label><input id="w-amount" type="number" min="0" step="0.01" placeholder="Example: 2945"></div>
+    </div>
+    <div class="btnrow"><button type="button" onclick="buildNegotiation()">Generate the call script</button> <button type="button" class="ghost" onclick="copyPre('negotiation-out')">Copy script</button></div>
+    <pre id="negotiation-out">Your call script will appear here.</pre>
+
+    <h3 style="margin-top:22px">Free human help, by problem</h3>
+    <ul style="margin:6px 0;padding-left:20px;line-height:1.7">
+      <li><b>Hospital financial assistance paperwork:</b> <a href="https://dollarfor.org/what-we-do/" target="_blank" rel="noopener">Dollar For</a>, a free nonprofit, will fill in the hospital application, submit it, and follow up for you after a short screening.</li>
+      <li><b>Medication copay you cannot afford:</b> <a href="https://totalassist.org/how-totalassist-helps-you/" target="_blank" rel="noopener">TotalAssist</a> runs grants for copays, premiums, and day of treatment charges across many conditions.</li>
+      <li><b>Insurer ignoring deadlines or acting in bad faith:</b> file a free complaint with your state insurance department through the <a href="https://content.naic.org/state-insurance-departments" target="_blank" rel="noopener">NAIC directory</a>. Job based plan problems can also go to the U.S. Department of Labor benefits advisors at 1-866-444-3272.</li>
+      <li><b>Surprise bill nobody will fix:</b> the No Surprises Help Desk, 1-800-985-3059, or <a href="https://www.cms.gov/nosurprises/consumers" target="_blank" rel="noopener">cms.gov/nosurprises</a>.</li>
+    </ul>
   </section>
 
   <section class="card" id="feedback">
@@ -246,7 +288,7 @@ function fmtDate(iso){ if(!iso) return ""; var d=new Date(iso+"T12:00:00"); retu
 function runTriage(){
   var out=[];
   if(document.getElementById("t-denied").checked){ out.push("<li><b>Appeal the denial.</b> Most people never appeal, and appealed denials are overturned often enough that filing is always worth it. Go to Step 3 and build your packet now, and note your deadline.</li>"); }
-  if(document.getElementById("t-er").checked){ out.push("<li><b>Check No Surprises Act protection.</b> For emergency care, and for providers you did not choose at an in network facility, federal law generally caps what you owe at your in network cost sharing. Ask the insurer to reprocess the claim under those protections, and call the No Surprises Help Desk at 1-800-985-3059 if they refuse.</li>"); }
+  if(document.getElementById("t-er").checked){ out.push("<li><b>Check No Surprises Act protection.</b> For emergency care, and for providers you did not choose at an in network facility, federal law generally caps what you owe at your in network cost sharing. Ask the insurer to reprocess the claim under those protections, and call the No Surprises Help Desk at 1-800-985-3059 if they refuse. One gap to know: federal law does not cover ground ambulance bills, though some states do, and air ambulance is covered.</li>"); }
   if(document.getElementById("t-gfe").checked){ out.push("<li><b>Compare the bill to your Good Faith Estimate.</b> If the final bill is at least $400 higher than the estimate for that provider, you can use the federal patient provider dispute process. You generally have 120 days from the first bill. Keep the estimate, it is your key document.</li>"); }
   if(document.getElementById("t-mismatch").checked){ out.push("<li><b>Do not pay the difference yet.</b> The amount your EOB lists as patient responsibility is what you should owe. Ask the provider billing office to match the bill to the EOB, in writing, before you pay.</li>"); }
   if(document.getElementById("t-hardship").checked){ out.push("<li><b>Run the assistance check in Step 2 before you pay.</b> A financial assistance write off or discount beats any payment plan.</li>"); }
@@ -263,8 +305,8 @@ function runAssistance(){
   var base=15960+(size-1)*5680;
   var pct=Math.round(income/base*100);
   var msg="";
-  if(pct<=200){ msg="<b>Strong signal: your income is about "+pct+" percent of the 2026 federal poverty level.</b> Many nonprofit hospitals give full financial assistance at or below 200 percent. Ask the hospital billing office for its financial assistance policy and application today, and tell them not to send the account to collections while your application is pending."; }
-  else if(pct<=300){ msg="<b>Real chance: your income is about "+pct+" percent of the 2026 federal poverty level.</b> Many nonprofit hospitals give partial discounts between 200 and 300 percent. Ask for the financial assistance policy and application, and apply even if you are insured. Underinsured patients qualify at many hospitals."; }
+  if(pct<=200){ msg="<b>Strong signal: your income is about "+pct+" percent of the 2026 federal poverty level.</b> Many nonprofit hospitals give full financial assistance at or below 200 percent. Federal law requires nonprofit hospitals to have a written assistance policy and to let you apply, but each hospital sets its own income limits, so read its policy for the exact cutoffs. Ask the hospital billing office for its financial assistance policy and application today. You generally have 240 days from your first bill after discharge to apply, and the hospital must pause aggressive collection while it decides a complete application. If the paperwork looks like a lot, the free nonprofit Dollar For (dollarfor.org) will complete and submit the application for you after a short screening."; }
+  else if(pct<=300){ msg="<b>Real chance: your income is about "+pct+" percent of the 2026 federal poverty level.</b> Many nonprofit hospitals give partial discounts between 200 and 300 percent. Federal law requires nonprofit hospitals to have a written assistance policy and to let you apply, but each hospital sets its own income limits, so read its policy for the exact cutoffs. Ask for the financial assistance policy and application, and apply even if you are insured. Underinsured patients qualify at many hospitals. You generally have 240 days from your first bill after discharge to apply, and the hospital must pause aggressive collection while it decides a complete application. If the paperwork looks like a lot, the free nonprofit Dollar For (dollarfor.org) will complete and submit the application for you after a short screening."; }
   else { msg="<b>Your income is about "+pct+" percent of the 2026 federal poverty level.</b> That is above the range most hospitals use for income based assistance. Still ask for two things: an itemized bill review, and a prompt pay or hardship discount. Hospitals grant exceptions that never appear on a website."; }
   box.className="result good show"; box.innerHTML=msg+"<br><span class='small'>Math shown: poverty level for a household of "+size+" is $"+base.toLocaleString()+" under the 2026 HHS guidelines for the 48 contiguous states and DC. Alaska and Hawaii use higher amounts.</span>";
 }
@@ -274,14 +316,19 @@ function calcDeadline(){
   var denialDate=val("f-denial-date");
   var box=document.getElementById("deadline-result");
   var target=null;
+  var plan=document.getElementById("f-plan").value;
+  var win=180, winNote=" This date uses the common 180 day internal appeal window for private and Marketplace plans. Your denial letter controls if it gives a different date.";
+  if(plan==="medicareadv"){ win=60; winNote=" This date uses the standard 60 day window to ask a Medicare Advantage plan for reconsideration. Your denial letter controls if it gives a different date."; }
+  else if(plan==="medicare"){ win=120; winNote=" This date uses the standard 120 day window to ask Original Medicare for a redetermination. Your denial notice controls if it gives a different date."; }
+  else if(plan==="medicaid"){ win=60; winNote=" This date uses the standard 60 day window to appeal to your Medicaid plan. If the plan says no, you can then ask your state for a fair hearing, generally within 90 to 120 days of the plan decision. Your denial letter controls if it gives a different date."; }
   if(letterDate){ target=new Date(letterDate+"T12:00:00"); }
-  else if(denialDate && document.getElementById("f-plan").value!=="medicareadv"){ target=new Date(denialDate+"T12:00:00"); target.setDate(target.getDate()+180); }
+  else if(denialDate){ target=new Date(denialDate+"T12:00:00"); target.setDate(target.getDate()+win); }
   if(!target){ box.className="result warn"; box.innerHTML=""; return; }
   var today=new Date(); today.setHours(12,0,0,0);
   var days=Math.ceil((target-today)/86400000);
   box.className="result warn show";
   if(days<0){ box.innerHTML="<b>That deadline has passed on paper.</b> Call the insurer and your state department of insurance today anyway. Late appeals are sometimes accepted for good cause, and external review rights may still be open."; }
-  else { box.innerHTML="<b>Your appeal deadline target: "+target.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})+"</b>, about "+days+" days from today. File well before this date and keep proof of delivery."+(letterDate?"":" This date uses the common 180 day internal appeal window from your denial date. Your denial letter controls if it gives a different date."); }
+  else { box.innerHTML="<b>Your appeal deadline target: "+target.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})+"</b>, about "+days+" days from today. File well before this date and keep proof of delivery."+(letterDate?"":winNote); }
 }
 
 function buildLetter(){
@@ -329,6 +376,56 @@ function copyLetter(){
 function downloadLetter(){
   var blob=new Blob([letterText()],{type:"text/plain"});
   var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="appeal-letter.txt"; a.click(); URL.revokeObjectURL(a.href);
+}
+function copyPre(id){
+  var t=document.getElementById(id).textContent;
+  if(navigator.clipboard){ navigator.clipboard.writeText(t).then(function(){ alert("Copied."); }); }
+  else { alert("Copy is not available in this browser. Select the text and copy it manually."); }
+}
+function calcExternal(){
+  var fd=val("x-final-date"); var box=document.getElementById("x-result");
+  if(!fd){ box.className="result info show"; box.innerHTML="Enter the date on your final denial letter first."; return; }
+  var d=new Date(fd+"T12:00:00"); d.setMonth(d.getMonth()+4);
+  var today=new Date(); today.setHours(12,0,0,0);
+  var days=Math.ceil((d-today)/86400000);
+  box.className="result warn show";
+  if(days<0){ box.innerHTML="<b>That 4 month target has passed on paper.</b> File anyway and ask about late filing for good cause, and call your state department of insurance today. Some states and plans allow exceptions, and a complaint sometimes reopens a closed door."; }
+  else { box.innerHTML="<b>Your external review request target: "+d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})+"</b>, about "+days+" days from today. That uses the federal 4 month standard from your final denial date. Some states set shorter windows, so check the deadline printed in your final denial letter and use the earlier date if they differ."; }
+}
+function buildItemized(){
+  var name=val("w-name")||"[Your name]"; var prov=val("w-provider")||"[Provider billing office]"; var acct=val("w-account");
+  var today=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+  var lines=[];
+  lines.push(today); lines.push(""); lines.push(name); lines.push("");
+  lines.push("To: "+prov+" (Billing Office)");
+  if(acct){ lines.push("Re: Account or statement number "+acct); }
+  lines.push("");
+  lines.push("I am requesting a complete itemized statement for my care, including every charge line with its procedure or revenue code, the date of each service, and the amount charged for each line. I am also requesting a copy of the claim as submitted to my insurer, if one was submitted.");
+  lines.push("");
+  lines.push("Please send the itemized statement to me directly. If any part of this request requires a specific form, tell me in writing what form you need. I am asking for this so I can compare the charges against my explanation of benefits before I pay.");
+  lines.push("");
+  lines.push("Thank you,"); lines.push(name);
+  document.getElementById("itemized-out").textContent=lines.join("\n");
+}
+function buildNegotiation(){
+  var amt=parseFloat(val("w-amount"))||0; var prov=val("w-provider")||"the hospital";
+  if(!amt){ document.getElementById("negotiation-out").textContent="Enter the bill amount above first, then generate the script."; return; }
+  var low=Math.round(amt*0.60); var mid=Math.round(amt*0.70);
+  var lines=[];
+  lines.push("CALL SCRIPT: NEGOTIATING A VALID BILL OF "+money(amt));
+  lines.push("");
+  lines.push("1. Open: \"I am calling about my balance of "+money(amt)+" with "+prov+". I am not disputing the care. I am trying to settle this account, and I need to know what you can actually do on the amount.\"");
+  lines.push("");
+  lines.push("2. Ask for the settlement number first: \"What is the lowest lump sum you can accept to close this account in full if I pay it this week?\" Then stop talking and let them answer.");
+  lines.push("");
+  lines.push("3. Your targets: advocates routinely see 30 to 40 percent off for a lump sum. On this bill that means offering about "+money(low)+" (40 percent off) and treating about "+money(mid)+" (30 percent off) as a good outcome. Counter once, calmly: \"I can do "+money(low)+" today. I cannot do more than that.\"");
+  lines.push("");
+  lines.push("4. If they say no, ask for the next desk: \"Who above you has authority to approve a settlement? Can you note the account that I called and made a good faith offer, so it is not sent to collections while this is open?\"");
+  lines.push("");
+  lines.push("5. If a lump sum is impossible, ask for their own plan: \"Do you offer a zero interest payment plan directly through the hospital? I am not interested in a medical credit card or a third party loan.\"");
+  lines.push("");
+  lines.push("6. Before you pay anything: \"Send me that agreement in writing, showing the account will be settled in full for that amount, and I will pay as soon as I get it.\" Never pay on a verbal agreement, and write down the date, the name of everyone you spoke with, and any reference number.");
+  document.getElementById("negotiation-out").textContent=lines.join("\n");
 }
 var FIELDS=["f-name","f-insurer","f-member","f-claim","f-provider","f-service","f-dos","f-denial-date","f-plan","f-reason","f-facts","f-deadline","hh-size","hh-income"];
 function saveLocal(){
@@ -441,7 +538,7 @@ function runGFE(){
   var deadline=""; var daysTxt="";
   if(bd){ var d=new Date(bd+"T12:00:00"); d.setDate(d.getDate()+120); deadline=d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); var today=new Date(); today.setHours(12,0,0,0); var days=Math.ceil((d-today)/86400000); daysTxt= days<0 ? " That date has passed on paper, so act today and ask about late filing for good cause." : " That is about "+days+" days from today. File early."; }
   box.className="result good show";
-  box.innerHTML="<b>Gap: "+money(gap)+" above the estimate, which clears the $400 threshold.</b><br>Next steps: 1. Call "+prov+" billing and ask them to honor the estimate or explain the gap in writing. 2. If they will not fix it, start the federal patient provider dispute process. You generally have 120 days from the first bill."+(deadline?" Your 120 day target date: <b>"+deadline+"</b>."+daysTxt:"")+" 3. You will need the Good Faith Estimate, the itemized bill, and this first bill date. The No Surprises Help Desk, 1-800-985-3059, can walk you through filing. There is a small federal filing fee, refunded if you win.";
+  box.innerHTML="<b>Gap: "+money(gap)+" above the estimate, which clears the $400 threshold.</b><br>Next steps: 1. Call "+prov+" billing and ask them to honor the estimate or explain the gap in writing. 2. If they will not fix it, start the federal patient provider dispute process. You generally have 120 days from the first bill."+(deadline?" Your 120 day target date: <b>"+deadline+"</b>."+daysTxt:"")+" 3. You will need the Good Faith Estimate, the itemized bill, and this first bill date. The No Surprises Help Desk, 1-800-985-3059, can walk you through filing. Filing costs a $25 federal fee. CMS calls it non refundable, but if the decision lowers your bill, the $25 comes off what you owe, so you get it back as a credit. Collections and late fees on the disputed amount must pause while the dispute is open.";
 }
 
 (function load(){
