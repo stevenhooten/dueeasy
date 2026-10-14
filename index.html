@@ -340,7 +340,7 @@
 
 </main>
 <footer>
-  <div class="wrap">DueEasy. General information only, not legal or medical advice. Rules and deadlines vary by plan and state. Verify yours against your denial letter and plan documents. <a href="privacy.html" style="color:#0a5e5d">Privacy policy</a>: nothing you type is sent anywhere.</div>
+  <div class="wrap">DueEasy. General information only, not legal or medical advice. Rules and deadlines vary by plan and state. Verify yours against your denial letter and plan documents. <a href="privacy.html" style="color:#0a5e5d">Privacy policy</a>: nothing you type is sent anywhere. We count visits and letter generations anonymously, counts only, never content.</div>
 </footer>
 
 <script>
@@ -372,6 +372,7 @@ var REASONS = {
 };
 
 function val(id){return document.getElementById(id).value.trim();}
+function countEvent(n){try{if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:n,event:true});}}catch(e){}}
 function fmtDate(iso){ if(!iso) return ""; var d=new Date(iso+"T12:00:00"); return d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); }
 
 function runTriage(){
@@ -421,6 +422,7 @@ function calcDeadline(){
 }
 
 function buildLetter(){
+  countEvent("appeal-letter");
   var r=REASONS[val("f-reason")||"other"];
   var today=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
   var lines=[];
@@ -482,6 +484,7 @@ function calcExternal(){
   else { box.innerHTML="<b>Your external review request target: "+d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})+"</b>, about "+days+" days from today. That uses the federal 4 month standard from your final denial date. Some states set shorter windows, so check the deadline printed in your final denial letter and use the earlier date if they differ."; }
 }
 function buildItemized(){
+  countEvent("itemized-letter");
   var name=val("w-name")||"[Your name]"; var prov=val("w-provider")||"[Provider billing office]"; var acct=val("w-account");
   var today=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
   var lines=[];
@@ -499,6 +502,7 @@ function buildItemized(){
 function buildNegotiation(){
   var amt=parseFloat(val("w-amount"))||0; var prov=val("w-provider")||"the hospital";
   if(!amt){ document.getElementById("negotiation-out").textContent="Enter the bill amount above first, then generate the script."; return; }
+  countEvent("negotiation-script");
   var low=Math.round(amt*0.60); var mid=Math.round(amt*0.70);
   var lines=[];
   lines.push("CALL SCRIPT: NEGOTIATING A VALID BILL OF "+money(amt));
@@ -638,5 +642,7 @@ function runGFE(){
 })();
 if(document.querySelectorAll("#match-rows .mrow").length===0){ addMatchRow(); }
 </script>
+<script data-goatcounter="https://dueeasy.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
