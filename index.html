@@ -68,6 +68,11 @@
   .hstat{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:10px 16px;backdrop-filter:blur(6px)}
   .hstat b{display:block;font-size:17px;letter-spacing:-.3px}
   .hstat span{font-size:12.5px;color:#bfe0da}
+  .herocta{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:24px}
+  .herobtn{background:#ffffff;color:#0a5e5d;border:none;padding:15px 24px;border-radius:12px;font-size:17px;font-weight:700;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.28)}
+  .herobtn:hover{background:#e7f6f2}
+  .herolink{color:#bfe0da;font-size:15.5px;text-decoration:underline}
+  .heronote{color:#bfe0da;font-size:13.5px;width:100%}
   nav{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 0}
   nav a{color:#eafffa;text-decoration:none;border:1px solid rgba(255,255,255,.30);background:rgba(255,255,255,.06);
     padding:8px 15px;border-radius:999px;font-size:14px;font-weight:600;min-height:40px;display:inline-flex;align-items:center;
@@ -167,6 +172,11 @@
       <div class="hstat"><b>6 checks</b><span>denial to endgame, in order</span></div>
       <div class="hstat"><b>No account</b><span>no signup, no upload, ever</span></div>
       <div class="hstat"><b>$0 to run</b><span>free, in your browser</span></div>
+    </div>
+    <div class="herocta">
+      <button type="button" class="herobtn" onclick="loadSample()">Watch a sample bill get checked</button>
+      <a class="herolink" href="#triage">or start with your own bill</a>
+      <span class="heronote">The sample is Jordan Smith, a denied MRI claim. One tap runs the whole appeal flow, nothing to type.</span>
     </div>
     <nav>
       <a href="#triage">Step 1: Triage</a>
@@ -457,6 +467,7 @@ var REASONS = {
 };
 
 function val(id){return document.getElementById(id).value.trim();}
+var SAMPLE_DEMO=false;
 function countEvent(n){try{if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:n,event:true});}}catch(e){}}
 function fmtDate(iso){ if(!iso) return ""; var d=new Date(iso+"T12:00:00"); return d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); }
 
@@ -507,7 +518,7 @@ function calcDeadline(){
 }
 
 function buildLetter(){
-  countEvent("appeal-letter");
+  countEvent(SAMPLE_DEMO ? "sample-letter" : "appeal-letter");
   var r=REASONS[val("f-reason")||"other"];
   var today=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
   var lines=[];
@@ -652,6 +663,7 @@ function clearLocal(){
   alert("Erased.");
 }
 function loadSample(){
+  SAMPLE_DEMO=true;
   document.getElementById("f-name").value="Jordan Smith";
   document.getElementById("f-insurer").value="Blue Cross";
   document.getElementById("f-member").value="TEST123";
@@ -665,6 +677,7 @@ function loadSample(){
   document.getElementById("f-facts").value="I did 8 weeks of physical therapy first and my pain got worse. My doctor documented this in my chart.";
   document.getElementById("f-deadline").value="";
   buildLetter();
+  SAMPLE_DEMO=false;
   document.getElementById("appeal").scrollIntoView({behavior:"smooth"});
 }
 
