@@ -175,10 +175,11 @@
     </div>
     <div class="herocta">
       <button type="button" class="herobtn" onclick="loadSample()">Watch a sample bill get checked</button>
-      <a class="herolink" href="#triage">or start with your own bill</a>
+      <a class="herolink" href="#quickcheck">or run the 60 second check on your own bill</a>
       <span class="heronote">The sample is Jordan Smith, a denied MRI claim. One tap runs the whole appeal flow, nothing to type.</span>
     </div>
     <nav>
+      <a href="#quickcheck">Quick check</a>
       <a href="#triage">Step 1: Triage</a>
       <a href="#assistance">Step 2: Assistance check</a>
       <a href="#appeal">Step 3: Build your appeal</a>
@@ -186,6 +187,7 @@
       <a href="#gfe">Step 5: Estimate checker</a>
       <a href="#wall">Step 6: If you hit a wall</a>
       <a href="#bills">My bills tracker</a>
+      <a href="#packet">Action packet</a>
     </nav>
   </div>
 </header>
@@ -195,6 +197,7 @@
   <section>
     <h2>How this works</h2>
     <div class="steps">
+      <div class="step"><b>0. Quick check.</b><br>Three numbers off your bill and your EOB. A straight answer in about a minute: do the amounts line up, or is there a gap worth fighting?</div>
       <div class="step"><b>1. Triage.</b><br>Answer five questions. Get the right first move for your situation, in the right order.</div>
       <div class="step"><b>2. Assistance check.</b><br>See if your income may qualify you for hospital financial assistance before you pay anything.</div>
       <div class="step"><b>3. Appeal builder.</b><br>Enter the facts from your denial letter. Get a finished appeal letter, a records checklist, and your deadline.</div>
@@ -202,6 +205,30 @@
       <div class="step"><b>5. Estimate checker.</b><br>No insurance, or paying yourself? Compare your final bill to your Good Faith Estimate and see if you can dispute the gap.</div>
     </div>
     <p class="small" style="margin-top:14px">This tool gives general information and document help. It is not legal advice and not medical advice. Your denial letter and your plan documents control your exact rights and deadlines.</p>
+  </section>
+
+  <section id="quickcheck">
+    <h2>Start here: the 60 second check</h2>
+    <p class="sub">Before any long form, answer this with two numbers. The amount the bill says you owe, and the amount your Explanation of Benefits (EOB) says you owe. If those two numbers do not match, the gap is the first thing to fight, and you should not pay it yet.</p>
+    <div class="grid">
+      <div><label for="q-bill">Amount the bill says you owe ($)</label><input id="q-bill" type="number" min="0" step="0.01" placeholder="Example: 2945"></div>
+      <div><label for="q-eob">Amount your EOB says you owe ($)</label><input id="q-eob" type="number" min="0" step="0.01" placeholder="Example: 492"></div>
+      <div><label for="q-billed">Total amount billed, if you know it ($, optional)</label><input id="q-billed" type="number" min="0" step="0.01" placeholder="Example: 5110"></div>
+    </div>
+    <label class="check"><input type="checkbox" id="q-noeob"> I do not have my EOB yet, or I cannot find that number</label>
+    <div class="btnrow"><button type="button" onclick="runQuickCheck()">Run the quick check</button></div>
+    <div id="q-result" class="result info"></div>
+    <p class="small">Nothing is uploaded. This runs in your browser, like everything else on this page.</p>
+  </section>
+
+  <section id="examples">
+    <h2>What a check can find</h2>
+    <p class="sub">Sample numbers, real patterns. These are the findings that make the effort worth it.</p>
+    <div class="steps">
+      <div class="step"><b>A $2,400 duplicate.</b><br>An MRI billed twice on the same day, same code. The EOB says $0 owed on the second line, but the bill still asks for the full $2,400. One phone call with the matcher script below is the whole fight.<br><button type="button" class="secondary" style="margin-top:10px" onclick="runExampleMatch()">See these lines in the matcher</button></div>
+      <div class="step"><b>A deadline most people never hear about.</b><br>Jordan Smith had an MRI denied on October 1. A private plan allows 180 days to appeal, which makes the deadline March 30, 2027. Miss it and the denial stands, even if it was wrong.<br><button type="button" class="secondary" style="margin-top:10px" onclick="loadSample()">Load this sample appeal</button></div>
+      <div class="step"><b>A write off hiding in plain sight.</b><br>A household of 4 earning $52,000 a year sits at about 158 percent of the 2026 federal poverty level. Many nonprofit hospitals give full financial assistance at or below 200 percent. Most people who qualify never apply.<br><button type="button" class="secondary" style="margin-top:10px" onclick="runExampleAssistance()">Run this assistance example</button></div>
+    </div>
   </section>
 
   <section id="triage">
@@ -389,6 +416,17 @@
     <p class="small">Tip: when a step on this page gives you a deadline, copy that date into the bill here. Erase everything (in Step 3) clears this list too.</p>
   </section>
 
+  <section class="card" id="packet">
+    <h2>Your action packet</h2>
+    <p class="sub">When you have run the checks you need, this gathers everything you built on this page into one printable packet: your quick check verdict, your appeal letter and records checklist, your bill matching results and call script, any request letter or negotiation script, your deadlines, and your saved bills. Print it, or save it as a PDF from the print screen. It is assembled on your device, nothing is uploaded.</p>
+    <div class="btnrow">
+      <button type="button" onclick="buildPacket()">Build my action packet</button>
+      <button type="button" class="secondary" onclick="downloadICS()">Download my deadline reminder (.ics)</button>
+    </div>
+    <div id="packet-result" class="result info"></div>
+    <p class="small">The calendar file adds each deadline you calculated on this visit as an all day event, with reminders 7 days and 1 day before. Import it into Google Calendar, Apple Calendar, or Outlook and the date cannot sit in a drawer forgotten.</p>
+  </section>
+
   <section class="card" id="feedback">
     <h2>Tell us what worked</h2>
     <p class="sub">DueEasy is new and free. Two minutes of feedback shapes what gets fixed next.</p>
@@ -472,6 +510,50 @@ var SAMPLE_DEMO=false;
 function countEvent(n){try{if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:n,event:true});}}catch(e){}}
 function fmtDate(iso){ if(!iso) return ""; var d=new Date(iso+"T12:00:00"); return d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); }
 
+var QUICK_VERDICT="";
+var PACKET_DEADLINES={};
+function toISODate(d){ var m=("0"+(d.getMonth()+1)).slice(-2); var day=("0"+d.getDate()).slice(-2); return d.getFullYear()+"-"+m+"-"+day; }
+function setDeadline(d,label){ try{ PACKET_DEADLINES[label]={iso:toISODate(d), text:d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})}; }catch(e){} }
+function runQuickCheck(){
+  var box=document.getElementById("q-result");
+  var bill=parseFloat(val("q-bill"));
+  var eobRaw=val("q-eob");
+  var eob=parseFloat(eobRaw);
+  var billed=parseFloat(val("q-billed"));
+  var noeob=document.getElementById("q-noeob").checked;
+  if(isNaN(bill)){ box.className="result warn show"; box.innerHTML="<b>Enter the amount the bill says you owe.</b> It is the balance or amount due printed on the bill."; return; }
+  countEvent("quick-check");
+  if(noeob || eobRaw===""){
+    box.className="result warn show";
+    box.innerHTML="<b>Do not pay this bill yet.</b> Without the EOB you cannot tell whether "+money(bill)+" is right, and paying first makes errors much harder to undo. Two moves first: 1. Get your EOB from your insurer app or portal, or call the number on your insurance card and ask for it. 2. If the bill is only a summary, generate the itemized bill request in Step 6 below. Then come back and run this check with both numbers.";
+    QUICK_VERDICT=box.innerText; return;
+  }
+  var gap=bill-eob;
+  var billedTxt = isNaN(billed) ? "" : " The provider billed "+money(billed)+" in total.";
+  if(gap>0.009){
+    box.className="result warn show";
+    box.innerHTML="<b>The bill asks for "+money(gap)+" more than your EOB says you owe.</b> The bill says "+money(bill)+". Your EOB puts your responsibility at "+money(eob)+"."+billedTxt+" For an in network claim, the EOB amount is what you should owe. <b>Do not pay the gap yet.</b> Next move: run Step 4, the bill vs EOB matcher, line by line. It finds which lines make up the gap and writes the call script for the billing office.";
+  } else if(gap<-0.009){
+    box.className="result info show";
+    box.innerHTML="<b>The bill asks for less than your EOB, by "+money(-gap)+".</b> That is unusual and usually in your favor. Before paying, call the billing office and confirm this bill closes the account, and that no second bill for the same date of service is coming. Get that confirmation with a name and a reference number.";
+  } else {
+    box.className="result good show";
+    box.innerHTML="<b>The amounts line up.</b> The bill and the EOB both say you owe "+money(bill)+"."+billedTxt+" That is a good sign, not a guarantee. Two checks still pay off: Step 4 flags duplicate lines the totals can hide, and Step 2 shows whether the hospital may write some of this off before you pay.";
+  }
+  QUICK_VERDICT=box.innerText;
+}
+function runExampleMatch(){
+  loadMatchSample();
+  runMatcher();
+  document.getElementById("matcher").scrollIntoView({behavior:"smooth"});
+}
+function runExampleAssistance(){
+  document.getElementById("hh-size").value="4";
+  document.getElementById("hh-income").value="52000";
+  runAssistance();
+  document.getElementById("assistance").scrollIntoView({behavior:"smooth"});
+}
+
 function runTriage(){
   var out=[];
   if(document.getElementById("t-denied").checked){ out.push("<li><b>Appeal the denial.</b> Most people never appeal, and appealed denials are overturned often enough that filing is always worth it. Go to Step 3 and build your packet now, and note your deadline.</li>"); }
@@ -511,6 +593,7 @@ function calcDeadline(){
   if(letterDate){ target=new Date(letterDate+"T12:00:00"); }
   else if(denialDate){ target=new Date(denialDate+"T12:00:00"); target.setDate(target.getDate()+win); }
   if(!target){ box.className="result warn"; box.innerHTML=""; return; }
+  setDeadline(target,"Insurance appeal deadline");
   var today=new Date(); today.setHours(12,0,0,0);
   var days=Math.ceil((target-today)/86400000);
   box.className="result warn show";
@@ -575,6 +658,7 @@ function calcExternal(){
   if(!fd){ box.className="result info show"; box.innerHTML="Enter the date on your final denial letter first."; return; }
   var d=new Date(fd+"T12:00:00"); d.setMonth(d.getMonth()+4);
   var today=new Date(); today.setHours(12,0,0,0);
+  setDeadline(d,"External review request deadline");
   var days=Math.ceil((d-today)/86400000);
   box.className="result warn show";
   if(days<0){ box.innerHTML="<b>That 4 month target has passed on paper.</b> File anyway and ask about late filing for good cause, and call your state department of insurance today. Some states and plans allow exceptions, and a complaint sometimes reopens a closed door."; }
@@ -762,9 +846,89 @@ function runGFE(){
     return;
   }
   var deadline=""; var daysTxt="";
-  if(bd){ var d=new Date(bd+"T12:00:00"); d.setDate(d.getDate()+120); deadline=d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); var today=new Date(); today.setHours(12,0,0,0); var days=Math.ceil((d-today)/86400000); daysTxt= days<0 ? " That date has passed on paper, so act today and ask about late filing for good cause." : " That is about "+days+" days from today. File early."; }
+  if(bd){ var d=new Date(bd+"T12:00:00"); d.setDate(d.getDate()+120); deadline=d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); var today=new Date(); today.setHours(12,0,0,0); setDeadline(d,"Good Faith Estimate dispute deadline"); var days=Math.ceil((d-today)/86400000); daysTxt= days<0 ? " That date has passed on paper, so act today and ask about late filing for good cause." : " That is about "+days+" days from today. File early."; }
   box.className="result good show";
   box.innerHTML="<b>Gap: "+money(gap)+" above the estimate, which clears the $400 threshold.</b><br>Next steps: 1. Call "+prov+" billing and ask them to honor the estimate or explain the gap in writing. 2. If they will not fix it, start the federal patient provider dispute process. You generally have 120 days from the first bill."+(deadline?" Your 120 day target date: <b>"+deadline+"</b>."+daysTxt:"")+" 3. You will need the Good Faith Estimate, the itemized bill, and this first bill date. The No Surprises Help Desk, 1-800-985-3059, can walk you through filing. Filing costs a $25 federal fee. CMS calls it non refundable, but if the decision lowers your bill, the $25 comes off what you owe, so you get it back as a credit. Collections and late fees on the disputed amount must pause while the dispute is open.";
+}
+
+function packetPart(title, text){
+  if(!text) return "";
+  var t=String(text).trim();
+  if(!t) return "";
+  var placeholders=["Your letter will appear here.","Your call script will appear here after you check the bill.","Your request letter will appear here.","Your call script will appear here."];
+  for(var i=0;i<placeholders.length;i++){ if(t===placeholders[i]) return ""; }
+  return "<h2>"+title+"</h2><pre>"+t.replace(/&/g,"&amp;").replace(/</g,"&lt;")+"</pre>";
+}
+function buildPacket(){
+  var parts=[];
+  if(QUICK_VERDICT){ parts.push(packetPart("Quick check verdict", QUICK_VERDICT)); }
+  var dl=document.getElementById("deadline-result");
+  if(dl && dl.className.indexOf("show")>=0){ parts.push(packetPart("Appeal deadline", dl.innerText)); }
+  parts.push(packetPart("Appeal letter", letterText()));
+  var cl=document.getElementById("checklist");
+  if(cl && cl.innerText && cl.innerText.indexOf("will appear here")<0){ parts.push(packetPart("Records checklist: send these with your appeal", cl.innerText)); }
+  var mr=document.getElementById("match-result");
+  if(mr && mr.className.indexOf("show")>=0){ parts.push(packetPart("Bill vs EOB matcher results", mr.innerText)); }
+  parts.push(packetPart("Provider call script (bill matching)", document.getElementById("match-script").textContent));
+  var gf=document.getElementById("gfe-result");
+  if(gf && gf.className.indexOf("show")>=0){ parts.push(packetPart("Good Faith Estimate check", gf.innerText)); }
+  var xr=document.getElementById("x-result");
+  if(xr && xr.className.indexOf("show")>=0){ parts.push(packetPart("External review deadline", xr.innerText)); }
+  parts.push(packetPart("Itemized bill request letter", document.getElementById("itemized-out").textContent));
+  parts.push(packetPart("Negotiation call script", document.getElementById("negotiation-out").textContent));
+  var bills=loadBills();
+  if(bills.length){
+    var bl=bills.map(function(x){ return (x.provider||"[Provider]")+" - "+money(x.amount)+" - "+x.status+(x.deadline?(" - deadline "+fmtDate(x.deadline)):"")+(x.note?(" - "+x.note):""); });
+    parts.push(packetPart("My tracked bills", bl.join("\n")));
+  }
+  parts=parts.filter(function(p){ return p!==""; });
+  var box=document.getElementById("packet-result");
+  if(!parts.length){
+    box.className="result warn show";
+    box.innerHTML="<b>Nothing to pack yet.</b> Run at least one check first: the 60 second check at the top is the fastest. The sample case counts too, tap Load the sample case in Step 3 and then build the packet.";
+    return;
+  }
+  countEvent("action-packet");
+  var today=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+  var doc="<!DOCTYPE html><html><head><meta charset='utf-8'><title>DueEasy Action Packet</title><style>body{font-family:Georgia,serif;max-width:720px;margin:32px auto;padding:0 20px;color:#1c2b33;line-height:1.55}h1{font-size:26px}h2{font-size:18px;margin-top:28px;border-bottom:1.5px solid #0a5e5d;padding-bottom:4px}pre{white-space:pre-wrap;font-family:inherit;font-size:14.5px}.small{color:#5a6d76;font-size:13px}</style></head><body>"
+    +"<h1>DueEasy Action Packet</h1><p class='small'>Built "+today+" at dueeasy.com. General information only, not legal or medical advice. Your denial letter and plan documents control your exact rights and deadlines. Keep a copy of everything you send, and send appeals in a way that gives you proof of delivery.</p>"
+    +parts.join("")
+    +"</body></html>";
+  var w=window.open("","_blank");
+  if(!w){
+    var blob=new Blob([doc],{type:"text/html"});
+    var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="dueeasy-action-packet.html"; a.click(); URL.revokeObjectURL(a.href);
+    box.className="result info show"; box.innerHTML="<b>Your browser blocked the print window,</b> so the packet was downloaded as a file instead. Open it and print, or save it as a PDF from the print screen.";
+    return;
+  }
+  w.document.open(); w.document.write(doc); w.document.close();
+  w.focus();
+  setTimeout(function(){ try{ w.print(); }catch(e){} }, 350);
+  box.className="result good show"; box.innerHTML="<b>Your packet opened in a new tab.</b> Print it, or choose Save as PDF in the print screen to keep a copy.";
+}
+function downloadICS(){
+  var keys=Object.keys(PACKET_DEADLINES);
+  var box=document.getElementById("packet-result");
+  if(!keys.length){
+    box.className="result warn show";
+    box.innerHTML="<b>No deadline calculated yet on this visit.</b> Deadlines come from Step 3 (appeal), Step 5 (Good Faith Estimate dispute), and Step 6 (external review). Run one of those, then download the reminder.";
+    return;
+  }
+  countEvent("deadline-ics");
+  function dstr(iso, addDays){ var d=new Date(iso+"T12:00:00"); d.setDate(d.getDate()+(addDays||0)); return toISODate(d).replace(/-/g,""); }
+  var evs=keys.map(function(k, i){
+    var dl=PACKET_DEADLINES[k];
+    return ["BEGIN:VEVENT","UID:dueeasy-"+dl.iso+"-"+i+"@dueeasy.com","DTSTAMP:"+dstr(toISODate(new Date())),"DTSTART;VALUE=DATE:"+dstr(dl.iso),"DTEND;VALUE=DATE:"+dstr(dl.iso,1),
+      "SUMMARY:DueEasy deadline: "+k,
+      "DESCRIPTION:Deadline calculated at dueeasy.com: "+dl.text+" ("+k+"). Your denial letter and plan documents control your exact deadline. Verify before relying on this date.",
+      "BEGIN:VALARM","ACTION:DISPLAY","TRIGGER:-P7D","DESCRIPTION:One week to your DueEasy deadline: "+k,"END:VALARM",
+      "BEGIN:VALARM","ACTION:DISPLAY","TRIGGER:-P1D","DESCRIPTION:Tomorrow is your DueEasy deadline: "+k,"END:VALARM",
+      "END:VEVENT"].join("\r\n");
+  });
+  var ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//DueEasy//Deadline Reminder//EN"].concat(evs).concat(["END:VCALENDAR"]).join("\r\n");
+  var blob=new Blob([ics],{type:"text/calendar"});
+  var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="dueeasy-deadlines.ics"; a.click(); URL.revokeObjectURL(a.href);
+  box.className="result good show"; box.innerHTML="<b>Deadline reminder downloaded.</b> Import the file into your calendar app and each deadline lands as an all day event with reminders 7 days and 1 day before.";
 }
 
 (function load(){
