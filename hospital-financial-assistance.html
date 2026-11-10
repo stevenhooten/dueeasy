@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hospital Financial Assistance: Income Limits and How to Apply | DueEasy</title>
-<meta name="description" content="Nonprofit hospitals must offer financial assistance. See the 2026 income table at 200 and 300 percent of the poverty level, the 240 day application window, and how to apply.">
+<title>Hospital Financial Assistance Checker: Income Limits and How to Apply | DueEasy</title>
+<meta name="description" content="See in one minute whether your income may qualify for a hospital bill write off or discount, using the 2026 federal poverty guidelines, then learn how to apply.">
 <link rel="canonical" href="https://dueeasy.com/hospital-financial-assistance.html">
-<meta property="og:title" content="Hospital Financial Assistance: Income Limits and How to Apply | DueEasy">
-<meta property="og:description" content="Nonprofit hospitals must offer financial assistance. See the 2026 income table at 200 and 300 percent of the poverty level, the 240 day application window, and how to apply.">
+<meta property="og:title" content="Hospital Financial Assistance Checker: Income Limits and How to Apply | DueEasy">
+<meta property="og:description" content="See in one minute whether your income may qualify for a hospital bill write off or discount, using the 2026 federal poverty guidelines, then learn how to apply.">
 <meta property="og:url" content="https://dueeasy.com/hospital-financial-assistance.html">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://dueeasy.com/og-image.png">
@@ -44,6 +44,30 @@ th{background:#eef6f9}
 footer{padding:10px 18px 38px;color:var(--muted);font-size:14px}
 footer a{color:var(--teal-dark)}
 strong{color:var(--ink)}
+
+/* --- DueEasy tools (phase 2) --- */
+:root{--warnbg:#fff6e6;--warnline:#eccd8f;--goodbg:#e8f6ee;--goodline:#a9d8bc;--infobg:#eef6f9;--infoline:#c3dde6;--infotx:#14424e;--ring:0 0 0 4px rgba(14,124,123,.18)}
+.toolcard label{display:block;font-weight:600;font-size:14px;margin:13px 0 5px;color:#24333d}
+.toolcard input,.toolcard select,.toolcard textarea{width:100%;padding:12px 13px;border:1.5px solid var(--line);border-radius:12px;font-size:16px;background:#fbfdfd;color:var(--ink);font-family:inherit}
+.toolcard input:focus,.toolcard select:focus,.toolcard textarea:focus{outline:none;border-color:var(--teal);background:#fff;box-shadow:var(--ring)}
+.toolcard button{background:linear-gradient(180deg,#11998f,var(--teal-dark));color:#fff;border:0;border-radius:13px;padding:13px 22px;font-size:16px;font-weight:700;cursor:pointer;min-height:50px;font-family:inherit}
+.toolcard button.secondary{background:#fff;color:var(--teal-dark);border:1.5px solid #bcd6d4}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.result{border-radius:14px;padding:16px 18px;margin-top:16px;display:none;font-size:15.5px;border:1.5px solid transparent;border-left:5px solid transparent}
+.result.show{display:block}
+.result.info{background:var(--infobg);border-color:var(--infoline);border-left-color:var(--teal);color:var(--infotx)}
+.result.good{background:var(--goodbg);border-color:var(--goodline);border-left-color:#2e9e5b;color:#0d4023}
+.result.warn{background:var(--warnbg);border-color:var(--warnline);border-left-color:#d99a26;color:#5e3d05}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.check{display:flex;gap:11px;align-items:flex-start;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;margin:0 0 10px;font-weight:500;font-size:15px;cursor:pointer;background:#fbfdfd}
+.check input{width:auto;margin-top:3px}
+.toolcard pre{white-space:pre-wrap;word-wrap:break-word;background:#fbfdfe;border:1.5px solid var(--line);border-radius:14px;padding:18px;font-size:14.5px;line-height:1.65;min-height:100px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.toolcard .sub{color:var(--muted);font-size:15.5px}
+.mrow{display:grid;grid-template-columns:0.8fr 1.4fr 1fr 1fr 1fr 1fr auto;gap:8px;align-items:end;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;background:#fbfdfd}
+.mrow label{margin:0 0 4px;font-size:12.5px}
+.mrow .rm{background:#fff;color:#8a2b1d;border:1.5px solid #dfa294;box-shadow:none;padding:10px 12px;min-height:44px}
+@media(max-width:760px){.mrow{grid-template-columns:1fr 1fr}}
 </style>
 <script data-goatcounter="https://dueeasy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">
@@ -62,8 +86,29 @@ strong{color:var(--ink)}
 
 <div class="card"><h2>The short version</h2>
 <p>Every nonprofit hospital must have a written financial assistance policy. Federal law requires the policy to exist, but it does not set one national income cutoff: each hospital sets its own. Many hospitals give free care at or below 200 percent of the federal poverty level and discounted care above that. You generally have <strong>240 days from the first bill</strong> to apply, and aggressive collections must pause while a complete application is being decided.</p>
-<a class="cta" href="https://dueeasy.com/#assistance">Screen your household in one minute, free</a>
+<a class="cta" href="#tool">Screen your household in one minute, free</a>
 <p class="small">Enter a household size and income. The math runs in your browser and nothing is sent anywhere.</p></div>
+
+<div class="card toolcard" id="tool">
+    <h2>Step 2: Could the hospital write some of this off?</h2>
+    <p class="sub">Nonprofit hospitals must have a financial assistance policy. Many patients who qualify never apply. This check uses the 2026 federal poverty guidelines for the 48 contiguous states and DC. Each hospital sets its own income limits, often between 200 and 300 percent of the poverty level, so treat this as a strong signal, not a guarantee.</p>
+    <div class="grid">
+      <div>
+        <label for="hh-size">People in your household</label>
+        <select id="hh-size">
+          <option value="1">1</option><option value="2">2</option><option value="3">3</option>
+          <option value="4" selected>4</option><option value="5">5</option><option value="6">6</option>
+          <option value="7">7</option><option value="8">8</option><option value="9">9 or more</option>
+        </select>
+      </div>
+      <div>
+        <label for="hh-income">Household income per year, before taxes</label>
+        <input id="hh-income" type="number" min="0" step="100" placeholder="Example: 52000">
+      </div>
+    </div>
+    <div class="btnrow"><button type="button" onclick="runAssistance()">Check my range</button></div>
+    <div id="assistance-result" class="result info"></div>
+  </div>
 
 <div class="card"><h2>2026 federal poverty guidelines, and what hospitals do with them</h2>
 <table>
@@ -94,10 +139,41 @@ strong{color:var(--ink)}
 <li>For profit hospitals are not covered by the federal rule, but many run their own charity programs. Ask anyway.</li>
 <li>Free help exists: Dollar For presses hospitals on these applications, and the Patient Advocate Foundation can be reached at 1-800-532-5274.</li>
 </ul>
-<a class="cta" href="https://dueeasy.com/#assistance">Check your percentage of the poverty level</a></div>
+<a class="cta" href="#tool">Check your percentage of the poverty level</a></div>
+
+<div class="card"><h2>Keep going: the other free tools</h2><ul>
+<li><a href="appeal-letter-guide.html#tool">Appeal letter generator</a>: your claim or treatment was denied.</li>
+<li><a href="bill-vs-eob.html#tool">Bill vs EOB matcher</a>: the bill and the EOB do not agree.</li>
+<li><a href="hospital-financial-assistance.html#tool">Assistance checker</a>: paying would be a hardship.</li>
+<li><a href="good-faith-estimate-dispute.html#tool">Estimate dispute checker</a>: the bill beat your estimate by $400 or more.</li>
+<li><a href="medical-bill-negotiation.html#tool">Negotiation script generator</a>: the bill is right but too big.</li>
+<li><a href="https://dueeasy.com/#packet">Your action packet</a>: gather everything you built into one printable packet, with a deadline calendar file.</li>
+</ul></div>
 
 <div class="card"><h2>Related guides</h2><ul><li><a href="appeal-letter-guide.html">Appeal a denied claim</a></li><li><a href="good-faith-estimate-dispute.html">Good Faith Estimate disputes</a></li><li><a href="bill-vs-eob.html">Bill vs. EOB matching</a></li><li><a href="surprise-bill-rights.html">Surprise bill rights</a></li><li><a href="medical-bill-negotiation.html">Negotiating a medical bill</a></li><li><a href="medical-bill-in-collections.html">Medical bill in collections</a></li><li><a href="how-to-fight-a-medical-bill.html">How to fight a medical bill</a></li><li><a href="how-to-read-an-eob.html">How to read an EOB</a></li><li><a href="medical-bill-payment-plan.html">Medical bill payment plans</a></li><li><a href="https://dueeasy.com/">The free DueEasy checker</a></li></ul></div>
 </div></main>
 <footer><div class="wrap">DueEasy is a free educational tool, not legal or medical advice. Rules and deadlines vary by plan and state, so confirm details in your denial letter and plan documents. <a href="https://dueeasy.com/privacy.html">Privacy policy</a>: nothing you type is sent anywhere. We count visits anonymously, counts only, never content.</div></footer>
+<script>
+var PACKET_DEADLINES={};
+function val(id){return document.getElementById(id).value.trim();}
+function countEvent(n){try{if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:n,event:true});}}catch(e){}}
+function fmtDate(iso){ if(!iso) return ""; var d=new Date(iso+"T12:00:00"); return d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); }
+function money(n){ return "$"+Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function toISODate(d){ var m=("0"+(d.getMonth()+1)).slice(-2); var day=("0"+d.getDate()).slice(-2); return d.getFullYear()+"-"+m+"-"+day; }
+function setDeadline(d,label){ try{ PACKET_DEADLINES[label]={iso:toISODate(d), text:d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})}; }catch(e){} }
+function runAssistance(){
+  var size=parseInt(val("hh-size"),10)||1;
+  var income=parseFloat(val("hh-income"));
+  var box=document.getElementById("assistance-result");
+  if(isNaN(income)){ box.className="result warn show"; box.innerHTML="<b>Enter your household income</b> so the check can run."; return; }
+  var base=15960+(size-1)*5680;
+  var pct=Math.round(income/base*100);
+  var msg="";
+  if(pct<=200){ msg="<b>Strong signal: your income is about "+pct+" percent of the 2026 federal poverty level.</b> Many nonprofit hospitals give full financial assistance at or below 200 percent. Federal law requires nonprofit hospitals to have a written assistance policy and to let you apply, but each hospital sets its own income limits, so read its policy for the exact cutoffs. Ask the hospital billing office for its financial assistance policy and application today. You generally have 240 days from your first bill after discharge to apply, and the hospital must pause aggressive collection while it decides a complete application. If the paperwork looks like a lot, the free nonprofit Dollar For (dollarfor.org) will complete and submit the application for you after a short screening."; }
+  else if(pct<=300){ msg="<b>Real chance: your income is about "+pct+" percent of the 2026 federal poverty level.</b> Many nonprofit hospitals give partial discounts between 200 and 300 percent. Federal law requires nonprofit hospitals to have a written assistance policy and to let you apply, but each hospital sets its own income limits, so read its policy for the exact cutoffs. Ask for the financial assistance policy and application, and apply even if you are insured. Underinsured patients qualify at many hospitals. You generally have 240 days from your first bill after discharge to apply, and the hospital must pause aggressive collection while it decides a complete application. If the paperwork looks like a lot, the free nonprofit Dollar For (dollarfor.org) will complete and submit the application for you after a short screening."; }
+  else { msg="<b>Your income is about "+pct+" percent of the 2026 federal poverty level.</b> That is above the range most hospitals use for income based assistance. Still ask for two things: an itemized bill review, and a prompt pay or hardship discount. Hospitals grant exceptions that never appear on a website."; }
+  box.className="result good show"; box.innerHTML=msg+"<br><span class='small'>Math shown: poverty level for a household of "+size+" is $"+base.toLocaleString()+" under the 2026 HHS guidelines for the 48 contiguous states and DC. Alaska and Hawaii use higher amounts.</span>";
+}
+</script>
 </body>
 </html>

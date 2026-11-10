@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How to Appeal a Denied Health Insurance Claim | DueEasy</title>
-<meta name="description" content="Appeal deadlines by plan type (180, 120, or 60 days), what records to gather, and how to structure the letter. Free builder with a plan specific deadline calculator.">
+<title>Free Appeal Letter Generator: Appeal a Denied Insurance Claim | DueEasy</title>
+<meta name="description" content="Denied by your insurer? Build a finished appeal letter free, with your deadline calculated by plan type and a records checklist. Runs on your device, nothing is uploaded.">
 <link rel="canonical" href="https://dueeasy.com/appeal-letter-guide.html">
-<meta property="og:title" content="How to Appeal a Denied Health Insurance Claim | DueEasy">
-<meta property="og:description" content="Appeal deadlines by plan type (180, 120, or 60 days), what records to gather, and how to structure the letter. Free builder with a plan specific deadline calculator.">
+<meta property="og:title" content="Free Appeal Letter Generator: Appeal a Denied Insurance Claim | DueEasy">
+<meta property="og:description" content="Denied by your insurer? Build a finished appeal letter free, with your deadline calculated by plan type and a records checklist. Runs on your device, nothing is uploaded.">
 <meta property="og:url" content="https://dueeasy.com/appeal-letter-guide.html">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://dueeasy.com/og-image.png">
@@ -44,6 +44,30 @@ th{background:#eef6f9}
 footer{padding:10px 18px 38px;color:var(--muted);font-size:14px}
 footer a{color:var(--teal-dark)}
 strong{color:var(--ink)}
+
+/* --- DueEasy tools (phase 2) --- */
+:root{--warnbg:#fff6e6;--warnline:#eccd8f;--goodbg:#e8f6ee;--goodline:#a9d8bc;--infobg:#eef6f9;--infoline:#c3dde6;--infotx:#14424e;--ring:0 0 0 4px rgba(14,124,123,.18)}
+.toolcard label{display:block;font-weight:600;font-size:14px;margin:13px 0 5px;color:#24333d}
+.toolcard input,.toolcard select,.toolcard textarea{width:100%;padding:12px 13px;border:1.5px solid var(--line);border-radius:12px;font-size:16px;background:#fbfdfd;color:var(--ink);font-family:inherit}
+.toolcard input:focus,.toolcard select:focus,.toolcard textarea:focus{outline:none;border-color:var(--teal);background:#fff;box-shadow:var(--ring)}
+.toolcard button{background:linear-gradient(180deg,#11998f,var(--teal-dark));color:#fff;border:0;border-radius:13px;padding:13px 22px;font-size:16px;font-weight:700;cursor:pointer;min-height:50px;font-family:inherit}
+.toolcard button.secondary{background:#fff;color:var(--teal-dark);border:1.5px solid #bcd6d4}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.result{border-radius:14px;padding:16px 18px;margin-top:16px;display:none;font-size:15.5px;border:1.5px solid transparent;border-left:5px solid transparent}
+.result.show{display:block}
+.result.info{background:var(--infobg);border-color:var(--infoline);border-left-color:var(--teal);color:var(--infotx)}
+.result.good{background:var(--goodbg);border-color:var(--goodline);border-left-color:#2e9e5b;color:#0d4023}
+.result.warn{background:var(--warnbg);border-color:var(--warnline);border-left-color:#d99a26;color:#5e3d05}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.check{display:flex;gap:11px;align-items:flex-start;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;margin:0 0 10px;font-weight:500;font-size:15px;cursor:pointer;background:#fbfdfd}
+.check input{width:auto;margin-top:3px}
+.toolcard pre{white-space:pre-wrap;word-wrap:break-word;background:#fbfdfe;border:1.5px solid var(--line);border-radius:14px;padding:18px;font-size:14.5px;line-height:1.65;min-height:100px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.toolcard .sub{color:var(--muted);font-size:15.5px}
+.mrow{display:grid;grid-template-columns:0.8fr 1.4fr 1fr 1fr 1fr 1fr auto;gap:8px;align-items:end;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;background:#fbfdfd}
+.mrow label{margin:0 0 4px;font-size:12.5px}
+.mrow .rm{background:#fff;color:#8a2b1d;border:1.5px solid #dfa294;box-shadow:none;padding:10px 12px;min-height:44px}
+@media(max-width:760px){.mrow{grid-template-columns:1fr 1fr}}
 </style>
 <script data-goatcounter="https://dueeasy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">
@@ -65,8 +89,66 @@ strong{color:var(--ink)}
 
 <div class="card"><h2>The short version</h2>
 <p>A denial is not the final word. It is the start of an appeal process with a deadline, and the deadline depends on your plan type. Find the date on your denial letter, count your window, and file in writing with records attached. A large share of denials are overturned when the treating provider's records go in with the appeal.</p>
-<a class="cta" href="https://dueeasy.com/#appeal">Build your appeal letter and deadline, free</a>
+<a class="cta" href="#tool">Build your appeal letter and deadline, free</a>
 <p class="small">The calculator uses your plan type and denial date. Nothing you type leaves your device.</p></div>
+
+<div class="card toolcard" id="tool">
+    <h2>Step 3: Build your appeal</h2>
+    <p class="sub">Copy the facts from your denial letter. For most private and Marketplace plans you have 180 days from the denial notice to file an internal appeal. Medicare and Medicaid use shorter windows, and the deadline calculator below adjusts for your plan type. Your letter is still the source that counts, so enter the deadline your letter gives you if it lists one.</p>
+    <div class="btnrow" style="margin:0 0 8px"><button type="button" class="secondary" onclick="loadSample()">Load the sample case (Jordan Smith)</button></div>
+    <div class="grid">
+      <div><label for="f-name">Your full name</label><input id="f-name" placeholder="Jordan Smith"></div>
+      <div><label for="f-insurer">Insurance company</label><input id="f-insurer" placeholder="Example: Blue Cross"></div>
+      <div><label for="f-member">Member ID</label><input id="f-member" placeholder="From your insurance card"></div>
+      <div><label for="f-claim">Claim number or denial reference</label><input id="f-claim" placeholder="From the denial letter"></div>
+      <div><label for="f-provider">Doctor or facility</label><input id="f-provider" placeholder="Who provided or ordered the care"></div>
+      <div><label for="f-service">Service or treatment denied</label><input id="f-service" placeholder="Example: MRI of the lower back"></div>
+      <div><label for="f-dos">Date of service, or date care was requested</label><input id="f-dos" type="date"></div>
+      <div><label for="f-denial-date">Date on the denial letter</label><input id="f-denial-date" type="date" onchange="calcDeadline()"></div>
+      <div>
+        <label for="f-plan">Plan type</label>
+        <select id="f-plan">
+          <option value="private">Private or job based plan</option>
+          <option value="marketplace">Marketplace plan</option>
+          <option value="medicareadv">Medicare Advantage</option>
+          <option value="medicare">Original Medicare</option>
+          <option value="medicaid">Medicaid managed care</option>
+          <option value="other">Other or not sure</option>
+        </select>
+      </div>
+      <div>
+        <label for="f-reason">Why did they say no?</label>
+        <select id="f-reason">
+          <option value="mednec">Not medically necessary</option>
+          <option value="noauth">No prior authorization</option>
+          <option value="coding">Coding or billing error</option>
+          <option value="notcovered">Service not covered by my plan</option>
+          <option value="oon">Out of network</option>
+          <option value="other">Another reason</option>
+        </select>
+      </div>
+    </div>
+    <label for="f-facts">Anything specific that supports your case, in your own words (optional)</label>
+    <textarea id="f-facts" placeholder="Example: I already tried 8 weeks of physical therapy and my symptoms got worse. My doctor documented this on March 3."></textarea>
+    <label for="f-deadline">Deadline on your denial letter (optional)</label>
+    <input id="f-deadline" type="date" onchange="calcDeadline()">
+    <div id="deadline-result" class="result warn"></div>
+    <div class="btnrow">
+      <button type="button" onclick="buildLetter()">Build my appeal packet</button>
+      <button type="button" class="secondary" onclick="saveLocal()">Save on this device</button>
+      <button type="button" class="secondary" onclick="clearLocal()">Erase everything</button>
+    </div>
+    <h3>Your appeal letter</h3>
+    <pre id="letter">Your letter will appear here.</pre>
+    <h3>Records checklist: send these with your appeal</h3>
+    <div id="checklist" class="small">Your checklist will appear here after you build your packet.</div>
+    <div class="btnrow">
+      <button type="button" class="secondary" onclick="copyLetter()">Copy letter</button>
+      <button type="button" class="secondary" onclick="downloadLetter()">Download letter (.txt)</button>
+      <button type="button" class="secondary" onclick="window.print()">Print</button>
+    </div>
+    <p class="small" style="margin-top:12px">Privacy: this page stores information only in your own browser if you tap Save on this device. Nothing is uploaded. Erase everything removes the saved copy. If your insurer still says no after your internal appeal, you generally have the right to an external review by an independent reviewer, and the reviewer's decision binds the plan. Under the federal standard you have 4 months from the final denial notice to request it, and some states set shorter windows, so do not sit on a final denial. Your denial letter and your state department of insurance can tell you how to file. The No Surprises Help Desk is 1-800-985-3059.</p>
+  </div>
 
 <div class="card"><h2>Appeal deadlines by plan type</h2>
 <table>
@@ -96,13 +178,160 @@ strong{color:var(--ink)}
 <li>Close with a request for a full and fair review and a written decision.</li>
 </ol>
 <p>The free builder on DueEasy drafts this letter from your denial details and prints your exact deadline next to it.</p>
-<a class="cta" href="https://dueeasy.com/#appeal">Start the appeal builder</a></div>
+<a class="cta" href="#tool">Start the appeal builder</a></div>
 
 <div class="card"><h2>If the final appeal still says no</h2>
 <p>Most plans owe you an <strong>independent external review</strong> after a final denial. You generally have <strong>4 months</strong> from the final denial to request it, an outside reviewer decides, and the decision binds the plan. The deadline calculator on DueEasy covers that date too, in the section called "If you hit a wall."</p></div>
 
+<div class="card"><h2>Keep going: the other free tools</h2><ul>
+<li><a href="appeal-letter-guide.html#tool">Appeal letter generator</a>: your claim or treatment was denied.</li>
+<li><a href="bill-vs-eob.html#tool">Bill vs EOB matcher</a>: the bill and the EOB do not agree.</li>
+<li><a href="hospital-financial-assistance.html#tool">Assistance checker</a>: paying would be a hardship.</li>
+<li><a href="good-faith-estimate-dispute.html#tool">Estimate dispute checker</a>: the bill beat your estimate by $400 or more.</li>
+<li><a href="medical-bill-negotiation.html#tool">Negotiation script generator</a>: the bill is right but too big.</li>
+<li><a href="https://dueeasy.com/#packet">Your action packet</a>: gather everything you built into one printable packet, with a deadline calendar file.</li>
+</ul></div>
+
 <div class="card"><h2>Related guides</h2><ul><li><a href="hospital-financial-assistance.html">Hospital financial assistance</a></li><li><a href="good-faith-estimate-dispute.html">Good Faith Estimate disputes</a></li><li><a href="bill-vs-eob.html">Bill vs. EOB matching</a></li><li><a href="surprise-bill-rights.html">Surprise bill rights</a></li><li><a href="medical-bill-negotiation.html">Negotiating a medical bill</a></li><li><a href="medical-bill-in-collections.html">Medical bill in collections</a></li><li><a href="how-to-fight-a-medical-bill.html">How to fight a medical bill</a></li><li><a href="how-to-read-an-eob.html">How to read an EOB</a></li><li><a href="medical-bill-payment-plan.html">Medical bill payment plans</a></li><li><a href="https://dueeasy.com/">The free DueEasy checker</a></li></ul></div>
 </div></main>
 <footer><div class="wrap">DueEasy is a free educational tool, not legal or medical advice. Rules and deadlines vary by plan and state, so confirm details in your denial letter and plan documents. <a href="https://dueeasy.com/privacy.html">Privacy policy</a>: nothing you type is sent anywhere. We count visits anonymously, counts only, never content.</div></footer>
+<script>
+var PACKET_DEADLINES={};
+function val(id){return document.getElementById(id).value.trim();}
+function countEvent(n){try{if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:n,event:true});}}catch(e){}}
+function fmtDate(iso){ if(!iso) return ""; var d=new Date(iso+"T12:00:00"); return d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); }
+function money(n){ return "$"+Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function toISODate(d){ var m=("0"+(d.getMonth()+1)).slice(-2); var day=("0"+d.getDate()).slice(-2); return d.getFullYear()+"-"+m+"-"+day; }
+function setDeadline(d,label){ try{ PACKET_DEADLINES[label]={iso:toISODate(d), text:d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})}; }catch(e){} }
+var SAMPLE_DEMO=false;
+var FIELDS=["f-name","f-insurer","f-member","f-claim","f-provider","f-service","f-dos","f-denial-date","f-plan","f-reason","f-facts","f-deadline"];
+var REASONS = {
+  mednec: {
+    para: "The denial states the service was not medically necessary. I am requesting a full and fair review. I have asked the treating provider to supply the clinical records that support this service, including office notes, prior treatment history, and the reasons alternatives were not sufficient. Please identify the specific clinical criteria you applied, the credentials of the reviewer who made this decision, and every record you relied on.",
+    list: ["A letter from your treating doctor explaining why this care is needed, with dates and prior treatments tried", "Office visit notes and test results that support the request", "A copy of the denial letter", "Your plan page or policy section that covers this type of care, if you have it"]
+  },
+  noauth: {
+    para: "The denial states that prior authorization was not obtained. I am requesting a full and fair review, including whether authorization was requested by the provider, whether the service was urgent, and whether retroactive authorization is available under my plan. Please provide the authorization records you hold for this date of service, including any request submitted by the provider and your response to it.",
+    list: ["Any authorization request or confirmation from the provider office, with dates", "Notes from your calls with the insurer: date, time, and the name of each person you spoke with", "Proof the care was urgent, if it was, such as ER records", "A copy of the denial letter"]
+  },
+  coding: {
+    para: "The denial appears to rest on a coding or billing error. I am requesting a full and fair review and a corrected claim review once the provider resubmits with accurate codes and records. Please state the exact code, modifier, or documentation problem you found, so the provider can correct the specific issue rather than resubmit blindly.",
+    list: ["The itemized bill with codes, from the provider billing office", "A corrected claim or a note from the provider billing office describing the fix", "Your EOB for this claim", "A copy of the denial letter"]
+  },
+  notcovered: {
+    para: "The denial states the service is not covered. I am requesting a full and fair review. Please cite the exact plan provision you relied on, and provide a copy of that provision. If the plan treats this service differently depending on diagnosis or setting, please explain which facts in my claim drove the exclusion and what documentation would change the outcome.",
+    list: ["The plan benefit booklet section the insurer cited, once they send it", "A letter from your doctor describing the diagnosis and why this service was ordered", "Any similar service your plan has covered for you before, with dates", "A copy of the denial letter"]
+  },
+  oon: {
+    para: "The denial or reduced payment rests on out of network status. I am requesting a full and fair review, including whether the No Surprises Act applies. That law generally limits patient cost sharing to in network amounts for emergency care and for providers a patient did not choose at an in network facility. Please state whether you applied those protections, and if not, the specific reason they do not apply to this claim.",
+    list: ["Your EOB and the provider bill, showing the amounts side by side", "Proof the facility was in network, such as a screenshot or plan directory page", "Any notice and consent form the insurer claims you signed, or a note that you never signed one", "A copy of the denial letter"]
+  },
+  other: {
+    para: "I am requesting a full and fair review of this denial. Please provide the specific reason for the denial in writing, the plan provisions and criteria you applied, the records you relied on, and the name and credentials of the person who made this decision, so I can respond to the actual basis for the denial.",
+    list: ["A copy of the denial letter", "Your EOB for this claim", "Records from your doctor that relate to this service", "Notes from every call with the insurer: date, time, and the name of each person you spoke with"]
+  }
+};
+function calcDeadline(){
+  var letterDate=val("f-deadline");
+  var denialDate=val("f-denial-date");
+  var box=document.getElementById("deadline-result");
+  var target=null;
+  var plan=document.getElementById("f-plan").value;
+  var win=180, winNote=" This date uses the common 180 day internal appeal window for private and Marketplace plans. Your denial letter controls if it gives a different date.";
+  if(plan==="medicareadv"){ win=60; winNote=" This date uses the standard 60 day window to ask a Medicare Advantage plan for reconsideration. Your denial letter controls if it gives a different date."; }
+  else if(plan==="medicare"){ win=120; winNote=" This date uses the standard 120 day window to ask Original Medicare for a redetermination. Your denial notice controls if it gives a different date."; }
+  else if(plan==="medicaid"){ win=60; winNote=" This date uses the standard 60 day window to appeal to your Medicaid plan. If the plan says no, you can then ask your state for a fair hearing, generally within 90 to 120 days of the plan decision. Your denial letter controls if it gives a different date."; }
+  if(letterDate){ target=new Date(letterDate+"T12:00:00"); }
+  else if(denialDate){ target=new Date(denialDate+"T12:00:00"); target.setDate(target.getDate()+win); }
+  if(!target){ box.className="result warn"; box.innerHTML=""; return; }
+  setDeadline(target,"Insurance appeal deadline");
+  var today=new Date(); today.setHours(12,0,0,0);
+  var days=Math.ceil((target-today)/86400000);
+  box.className="result warn show";
+  if(days<0){ box.innerHTML="<b>That deadline has passed on paper.</b> Call the insurer and your state department of insurance today anyway. Late appeals are sometimes accepted for good cause, and external review rights may still be open."; }
+  else { box.innerHTML="<b>Your appeal deadline target: "+target.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})+"</b>, about "+days+" days from today. File well before this date and keep proof of delivery."+(letterDate?"":winNote); }
+}
+function buildLetter(){
+  countEvent(SAMPLE_DEMO ? "sample-letter" : "appeal-letter");
+  var r=REASONS[val("f-reason")||"other"];
+  var today=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+  var lines=[];
+  lines.push(today);
+  lines.push("");
+  lines.push("To: "+(val("f-insurer")||"[Insurance company]")+", Claims Appeals Department");
+  lines.push("From: "+(val("f-name")||"[Your name]"));
+  lines.push("Member ID: "+(val("f-member")||"[Member ID]"));
+  lines.push("Claim or denial reference: "+(val("f-claim")||"[Claim number]"));
+  lines.push("Provider: "+(val("f-provider")||"[Provider]"));
+  lines.push("Service: "+(val("f-service")||"[Service]"));
+  if(val("f-dos")) lines.push("Date of service: "+fmtDate(val("f-dos")));
+  if(val("f-denial-date")) lines.push("Denial date: "+fmtDate(val("f-denial-date")));
+  lines.push("");
+  lines.push("Subject: Request for internal appeal and full and fair review");
+  lines.push("");
+  lines.push("Dear Appeals Department,");
+  lines.push("");
+  lines.push("I am appealing the denial listed above and asking for a full and fair review of this decision.");
+  lines.push("");
+  lines.push(r.para);
+  if(val("f-facts")){ lines.push(""); lines.push("Facts I want considered in this review: "+val("f-facts")); }
+  lines.push("");
+  lines.push("Please send me, free of charge, a copy of the documents and criteria relied on in this denial, and written notice of your decision and of my external review rights if the denial stands.");
+  lines.push("");
+  lines.push("Thank you for your time. Please contact me if anything further is needed to process this appeal before my deadline.");
+  lines.push("");
+  lines.push("Sincerely,");
+  lines.push(val("f-name")||"[Your name]");
+  document.getElementById("letter").textContent=lines.join("\n");
+  var list=r.list.map(function(i){return "<li>"+i+"</li>";}).join("");
+  document.getElementById("checklist").innerHTML="<ul style='margin:6px 0;padding-left:20px'>"+list+"</ul><p class='small'>Keep a copy of everything you send, and send the appeal in a way that gives you proof of delivery.</p>";
+  calcDeadline();
+}
+function letterText(){ return document.getElementById("letter").textContent; }
+function copyLetter(){
+  var t=letterText();
+  if(navigator.clipboard){ navigator.clipboard.writeText(t).then(function(){ alert("Letter copied."); }); }
+  else { alert("Copy is not available in this browser. Select the letter text and copy it manually."); }
+}
+function downloadLetter(){
+  var blob=new Blob([letterText()],{type:"text/plain"});
+  var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="appeal-letter.txt"; a.click(); URL.revokeObjectURL(a.href);
+}
+function saveLocal(){
+  var data={}; FIELDS.forEach(function(id){ data[id]=val(id); });
+  try{ localStorage.setItem("byp-appeal",JSON.stringify(data)); alert("Saved in this browser, on this device only."); }catch(e){ alert("Saving is not available in this browser."); }
+}
+function clearLocal(){
+  try{ localStorage.removeItem("byp-appeal");  try{ localStorage.removeItem("dueeasyBillsV1"); }catch(e){} if(document.getElementById("bills-list")){ renderBills(); } }catch(e){}
+  FIELDS.forEach(function(id){ document.getElementById(id).value=""; });
+  document.getElementById("letter").textContent="Your letter will appear here.";
+  document.getElementById("checklist").textContent="Your checklist will appear here after you build your packet.";
+  alert("Erased.");
+}
+function loadSample(){
+  SAMPLE_DEMO=true;
+  document.getElementById("f-name").value="Jordan Smith";
+  document.getElementById("f-insurer").value="Blue Cross";
+  document.getElementById("f-member").value="TEST123";
+  document.getElementById("f-claim").value="CLM998877";
+  document.getElementById("f-provider").value="St. Augustine Imaging";
+  document.getElementById("f-service").value="MRI of the lower back";
+  document.getElementById("f-dos").value="2026-09-20";
+  document.getElementById("f-denial-date").value="2026-10-01";
+  document.getElementById("f-plan").value="private";
+  document.getElementById("f-reason").value="mednec";
+  document.getElementById("f-facts").value="I did 8 weeks of physical therapy first and my pain got worse. My doctor documented this in my chart.";
+  document.getElementById("f-deadline").value="";
+  buildLetter();
+  SAMPLE_DEMO=false;
+  document.getElementById("tool").scrollIntoView({behavior:"smooth"});
+}
+(function load(){
+  var raw=null; try{ raw=localStorage.getItem("byp-appeal"); }catch(e){}
+  if(!raw) return;
+  var data=JSON.parse(raw);
+  FIELDS.forEach(function(id){ if(data[id]) document.getElementById(id).value=data[id]; });
+})();
+</script>
 </body>
 </html>

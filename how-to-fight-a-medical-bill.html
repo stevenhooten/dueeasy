@@ -47,6 +47,30 @@ th{background:#eef6f9}
 footer{padding:10px 18px 38px;color:var(--muted);font-size:14px}
 footer a{color:var(--teal-dark)}
 strong{color:var(--ink)}
+
+/* --- DueEasy tools (phase 2) --- */
+:root{--warnbg:#fff6e6;--warnline:#eccd8f;--goodbg:#e8f6ee;--goodline:#a9d8bc;--infobg:#eef6f9;--infoline:#c3dde6;--infotx:#14424e;--ring:0 0 0 4px rgba(14,124,123,.18)}
+.toolcard label{display:block;font-weight:600;font-size:14px;margin:13px 0 5px;color:#24333d}
+.toolcard input,.toolcard select,.toolcard textarea{width:100%;padding:12px 13px;border:1.5px solid var(--line);border-radius:12px;font-size:16px;background:#fbfdfd;color:var(--ink);font-family:inherit}
+.toolcard input:focus,.toolcard select:focus,.toolcard textarea:focus{outline:none;border-color:var(--teal);background:#fff;box-shadow:var(--ring)}
+.toolcard button{background:linear-gradient(180deg,#11998f,var(--teal-dark));color:#fff;border:0;border-radius:13px;padding:13px 22px;font-size:16px;font-weight:700;cursor:pointer;min-height:50px;font-family:inherit}
+.toolcard button.secondary{background:#fff;color:var(--teal-dark);border:1.5px solid #bcd6d4}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.result{border-radius:14px;padding:16px 18px;margin-top:16px;display:none;font-size:15.5px;border:1.5px solid transparent;border-left:5px solid transparent}
+.result.show{display:block}
+.result.info{background:var(--infobg);border-color:var(--infoline);border-left-color:var(--teal);color:var(--infotx)}
+.result.good{background:var(--goodbg);border-color:var(--goodline);border-left-color:#2e9e5b;color:#0d4023}
+.result.warn{background:var(--warnbg);border-color:var(--warnline);border-left-color:#d99a26;color:#5e3d05}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.check{display:flex;gap:11px;align-items:flex-start;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;margin:0 0 10px;font-weight:500;font-size:15px;cursor:pointer;background:#fbfdfd}
+.check input{width:auto;margin-top:3px}
+.toolcard pre{white-space:pre-wrap;word-wrap:break-word;background:#fbfdfe;border:1.5px solid var(--line);border-radius:14px;padding:18px;font-size:14.5px;line-height:1.65;min-height:100px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.toolcard .sub{color:var(--muted);font-size:15.5px}
+.mrow{display:grid;grid-template-columns:0.8fr 1.4fr 1fr 1fr 1fr 1fr auto;gap:8px;align-items:end;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;background:#fbfdfd}
+.mrow label{margin:0 0 4px;font-size:12.5px}
+.mrow .rm{background:#fff;color:#8a2b1d;border:1.5px solid #dfa294;box-shadow:none;padding:10px 12px;min-height:44px}
+@media(max-width:760px){.mrow{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -62,10 +86,71 @@ strong{color:var(--ink)}
 <h2>Step 4: Negotiate what survives, in writing</h2><p>Whatever is left after errors, assistance, and appeals is the real number. Ask for a specific reduction, 30 to 40 percent is a reasonable target, reference prompt payment, and get the agreement in writing before you pay a dollar. A verbal discount from a billing call center has a way of disappearing.</p>
 <h2>Step 5: If it lands in collections anyway</h2><p>Do not pay a collector on the first call. You have 30 days from their first contact to demand validation in writing, which forces them to prove the debt and the amount. Then ask the hospital to recall the account while your assistance application is processed. Accounts get recalled more often than people expect.</p>
 <div class="cta"><p><strong>Start at step 1:</strong> the free DueEasy checker runs this on your device. Nothing you type is uploaded.</p>
-<a class="button" href="https://dueeasy.com/#triage">Open the free checker</a></div><h2>Common questions</h2>
+<a class="button" href="#tool">Open the free checker</a></div><h2>Common questions</h2>
 <h3>What percentage of medical bills have errors?</h3><p>Estimates vary widely, and no official count exists. What is verifiable on your own bill: duplicate lines, charges for services not received, and totals above the EOB patient responsibility. Any one of those is correctable in full, which is why checking comes before negotiating.</p><h3>How long do I have to fight a medical bill?</h3><p>Several clocks run at once: insurer appeal deadlines run 60 to 180 days by plan type, financial assistance applications run 240 days from the first bill, Good Faith Estimate disputes run 120 days, and external review runs 4 months from a final denial. The safest move is to start the week the bill arrives.</p><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What percentage of medical bills have errors?", "acceptedAnswer": {"@type": "Answer", "text": "Estimates vary widely, and no official count exists. What is verifiable on your own bill: duplicate lines, charges for services not received, and totals above the EOB patient responsibility. Any one of those is correctable in full, which is why checking comes before negotiating."}}]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How long do I have to fight a medical bill?", "acceptedAnswer": {"@type": "Answer", "text": "Several clocks run at once: insurer appeal deadlines run 60 to 180 days by plan type, financial assistance applications run 240 days from the first bill, Good Faith Estimate disputes run 120 days, and external review runs 4 months from a final denial. The safest move is to start the week the bill arrives."}}]}</script></div>
+<div class="card toolcard" id="tool">
+    <h2>Start here: the 60 second check</h2>
+    <p class="sub">Before any long form, answer this with two numbers. The amount the bill says you owe, and the amount your Explanation of Benefits (EOB) says you owe. If those two numbers do not match, the gap is the first thing to fight, and you should not pay it yet.</p>
+    <div class="grid">
+      <div><label for="q-bill">Amount the bill says you owe ($)</label><input id="q-bill" type="number" min="0" step="0.01" placeholder="Example: 2945"></div>
+      <div><label for="q-eob">Amount your EOB says you owe ($)</label><input id="q-eob" type="number" min="0" step="0.01" placeholder="Example: 492"></div>
+      <div><label for="q-billed">Total amount billed, if you know it ($, optional)</label><input id="q-billed" type="number" min="0" step="0.01" placeholder="Example: 5110"></div>
+    </div>
+    <label class="check"><input type="checkbox" id="q-noeob"> I do not have my EOB yet, or I cannot find that number</label>
+    <div class="btnrow"><button type="button" onclick="runQuickCheck()">Run the quick check</button></div>
+    <div id="q-result" class="result info"></div>
+    <p class="small">Nothing is uploaded. This runs in your browser, like everything else on this page.</p>
+  </div>
+
+<div class="card"><h2>Keep going: the other free tools</h2><ul>
+<li><a href="appeal-letter-guide.html#tool">Appeal letter generator</a>: your claim or treatment was denied.</li>
+<li><a href="bill-vs-eob.html#tool">Bill vs EOB matcher</a>: the bill and the EOB do not agree.</li>
+<li><a href="hospital-financial-assistance.html#tool">Assistance checker</a>: paying would be a hardship.</li>
+<li><a href="good-faith-estimate-dispute.html#tool">Estimate dispute checker</a>: the bill beat your estimate by $400 or more.</li>
+<li><a href="medical-bill-negotiation.html#tool">Negotiation script generator</a>: the bill is right but too big.</li>
+<li><a href="https://dueeasy.com/#packet">Your action packet</a>: gather everything you built into one printable packet, with a deadline calendar file.</li>
+</ul></div>
+
 <div class="card"><h2>Related guides</h2><ul><li><a href="appeal-letter-guide.html">Appeal a denied claim</a></li><li><a href="hospital-financial-assistance.html">Hospital financial assistance</a></li><li><a href="good-faith-estimate-dispute.html">Good Faith Estimate disputes</a></li><li><a href="bill-vs-eob.html">Bill vs. EOB matching</a></li><li><a href="surprise-bill-rights.html">Surprise bill rights</a></li><li><a href="medical-bill-negotiation.html">Negotiating a medical bill</a></li><li><a href="medical-bill-in-collections.html">Medical bill in collections</a></li><li><a href="how-to-read-an-eob.html">How to read an EOB</a></li><li><a href="medical-bill-payment-plan.html">Medical bill payment plans</a></li><li><a href="https://dueeasy.com/">The free DueEasy checker</a></li></ul></div>
 <div class="footer">DueEasy is a free educational tool. It is not legal, medical, or financial advice, and it does not replace a patient advocate or an attorney. Deadlines and rules vary by plan and by state; check your own documents.</div>
 </div></main>
+<script>
+var PACKET_DEADLINES={};
+function val(id){return document.getElementById(id).value.trim();}
+function countEvent(n){try{if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:n,event:true});}}catch(e){}}
+function fmtDate(iso){ if(!iso) return ""; var d=new Date(iso+"T12:00:00"); return d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); }
+function money(n){ return "$"+Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function toISODate(d){ var m=("0"+(d.getMonth()+1)).slice(-2); var day=("0"+d.getDate()).slice(-2); return d.getFullYear()+"-"+m+"-"+day; }
+function setDeadline(d,label){ try{ PACKET_DEADLINES[label]={iso:toISODate(d), text:d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})}; }catch(e){} }
+var QUICK_VERDICT="";
+function runQuickCheck(){
+  var box=document.getElementById("q-result");
+  var bill=parseFloat(val("q-bill"));
+  var eobRaw=val("q-eob");
+  var eob=parseFloat(eobRaw);
+  var billed=parseFloat(val("q-billed"));
+  var noeob=document.getElementById("q-noeob").checked;
+  if(isNaN(bill)){ box.className="result warn show"; box.innerHTML="<b>Enter the amount the bill says you owe.</b> It is the balance or amount due printed on the bill."; return; }
+  countEvent("quick-check");
+  if(noeob || eobRaw===""){
+    box.className="result warn show";
+    box.innerHTML="<b>Do not pay this bill yet.</b> Without the EOB you cannot tell whether "+money(bill)+" is right, and paying first makes errors much harder to undo. Two moves first: 1. Get your EOB from your insurer app or portal, or call the number on your insurance card and ask for it. 2. If the bill is only a summary, use the itemized bill request on the <a href='medical-bill-in-collections.html#tool'>collections page</a>. Then run this check again with both numbers.";
+    QUICK_VERDICT=box.innerText; return;
+  }
+  var gap=bill-eob;
+  var billedTxt = isNaN(billed) ? "" : " The provider billed "+money(billed)+" in total.";
+  if(gap>0.009){
+    box.className="result warn show";
+    box.innerHTML="<b>The bill asks for "+money(gap)+" more than your EOB says you owe.</b> The bill says "+money(bill)+". Your EOB puts your responsibility at "+money(eob)+"."+billedTxt+" For an in network claim, the EOB amount is what you should owe. <b>Do not pay the gap yet.</b> Next move: the <a href='bill-vs-eob.html#tool'>free bill vs EOB matcher</a> goes line by line, finds which lines make up the gap, and writes the call script for the billing office.";
+  } else if(gap<-0.009){
+    box.className="result info show";
+    box.innerHTML="<b>The bill asks for less than your EOB, by "+money(-gap)+".</b> That is unusual and usually in your favor. Before paying, call the billing office and confirm this bill closes the account, and that no second bill for the same date of service is coming. Get that confirmation with a name and a reference number.";
+  } else {
+    box.className="result good show";
+    box.innerHTML="<b>The amounts line up.</b> The bill and the EOB both say you owe "+money(bill)+"."+billedTxt+" That is a good sign, not a guarantee. Two checks still pay off: the <a href='bill-vs-eob.html#tool'>matcher</a> flags duplicate lines the totals can hide, and the <a href='hospital-financial-assistance.html#tool'>assistance checker</a> shows whether the hospital may write some of this off before you pay.";
+  }
+  QUICK_VERDICT=box.innerText;
+}
+</script>
 </body>
 </html>

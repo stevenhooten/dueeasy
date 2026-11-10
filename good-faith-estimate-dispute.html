@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Good Faith Estimate Dispute: The $400 Rule and 120 Days to File | DueEasy</title>
-<meta name="description" content="Self pay or uninsured and billed $400 or more over your Good Faith Estimate? You can dispute it federally within 120 days. Here is who qualifies and how it works.">
+<title>Good Faith Estimate Dispute Checker: The $400 Rule and 120 Days | DueEasy</title>
+<meta name="description" content="Was your final bill at least $400 over your Good Faith Estimate? Run the free checker for your dispute deadline and the exact steps to file.">
 <link rel="canonical" href="https://dueeasy.com/good-faith-estimate-dispute.html">
-<meta property="og:title" content="Good Faith Estimate Dispute: The $400 Rule and 120 Days to File | DueEasy">
-<meta property="og:description" content="Self pay or uninsured and billed $400 or more over your Good Faith Estimate? You can dispute it federally within 120 days. Here is who qualifies and how it works.">
+<meta property="og:title" content="Good Faith Estimate Dispute Checker: The $400 Rule and 120 Days | DueEasy">
+<meta property="og:description" content="Was your final bill at least $400 over your Good Faith Estimate? Run the free checker for your dispute deadline and the exact steps to file.">
 <meta property="og:url" content="https://dueeasy.com/good-faith-estimate-dispute.html">
 <meta property="og:type" content="article">
 <meta property="og:image" content="https://dueeasy.com/og-image.png">
@@ -44,6 +44,30 @@ th{background:#eef6f9}
 footer{padding:10px 18px 38px;color:var(--muted);font-size:14px}
 footer a{color:var(--teal-dark)}
 strong{color:var(--ink)}
+
+/* --- DueEasy tools (phase 2) --- */
+:root{--warnbg:#fff6e6;--warnline:#eccd8f;--goodbg:#e8f6ee;--goodline:#a9d8bc;--infobg:#eef6f9;--infoline:#c3dde6;--infotx:#14424e;--ring:0 0 0 4px rgba(14,124,123,.18)}
+.toolcard label{display:block;font-weight:600;font-size:14px;margin:13px 0 5px;color:#24333d}
+.toolcard input,.toolcard select,.toolcard textarea{width:100%;padding:12px 13px;border:1.5px solid var(--line);border-radius:12px;font-size:16px;background:#fbfdfd;color:var(--ink);font-family:inherit}
+.toolcard input:focus,.toolcard select:focus,.toolcard textarea:focus{outline:none;border-color:var(--teal);background:#fff;box-shadow:var(--ring)}
+.toolcard button{background:linear-gradient(180deg,#11998f,var(--teal-dark));color:#fff;border:0;border-radius:13px;padding:13px 22px;font-size:16px;font-weight:700;cursor:pointer;min-height:50px;font-family:inherit}
+.toolcard button.secondary{background:#fff;color:var(--teal-dark);border:1.5px solid #bcd6d4}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.result{border-radius:14px;padding:16px 18px;margin-top:16px;display:none;font-size:15.5px;border:1.5px solid transparent;border-left:5px solid transparent}
+.result.show{display:block}
+.result.info{background:var(--infobg);border-color:var(--infoline);border-left-color:var(--teal);color:var(--infotx)}
+.result.good{background:var(--goodbg);border-color:var(--goodline);border-left-color:#2e9e5b;color:#0d4023}
+.result.warn{background:var(--warnbg);border-color:var(--warnline);border-left-color:#d99a26;color:#5e3d05}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0 18px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+.check{display:flex;gap:11px;align-items:flex-start;padding:13px 14px;border:1.5px solid var(--line);border-radius:14px;margin:0 0 10px;font-weight:500;font-size:15px;cursor:pointer;background:#fbfdfd}
+.check input{width:auto;margin-top:3px}
+.toolcard pre{white-space:pre-wrap;word-wrap:break-word;background:#fbfdfe;border:1.5px solid var(--line);border-radius:14px;padding:18px;font-size:14.5px;line-height:1.65;min-height:100px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.toolcard .sub{color:var(--muted);font-size:15.5px}
+.mrow{display:grid;grid-template-columns:0.8fr 1.4fr 1fr 1fr 1fr 1fr auto;gap:8px;align-items:end;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin-bottom:10px;background:#fbfdfd}
+.mrow label{margin:0 0 4px;font-size:12.5px}
+.mrow .rm{background:#fff;color:#8a2b1d;border:1.5px solid #dfa294;box-shadow:none;padding:10px 12px;min-height:44px}
+@media(max-width:760px){.mrow{grid-template-columns:1fr 1fr}}
 </style>
 <script data-goatcounter="https://dueeasy.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">
@@ -65,8 +89,21 @@ strong{color:var(--ink)}
 
 <div class="card"><h2>The short version</h2>
 <p>If you are uninsured or paying for care yourself, the provider generally has to give you a Good Faith Estimate before scheduled care. If the final bill is <strong>$400 or more above that estimate</strong>, you can open a federal dispute within <strong>120 days of the first bill</strong>. The filing fee is $25, collections pause during the dispute, and if the decision lowers your bill, the fee is credited against what you owe.</p>
-<a class="cta" href="https://dueeasy.com/#gfe">Check your estimate against your bill, free</a>
+<a class="cta" href="#tool">Check your estimate against your bill, free</a>
 <p class="small">Enter the estimate, the bill, and the first bill date. The checker does the gap math and your deadline.</p></div>
+
+<div class="card toolcard" id="tool">
+    <h2>Step 5: Good Faith Estimate checker</h2>
+    <p class="sub">For patients with no insurance, or who chose to pay for themselves. If your final bill from a provider is at least $400 more than that provider's written Good Faith Estimate, federal rules generally let you dispute the bill through the patient provider dispute process, within 120 days of the first bill. Keep both documents, they are the whole case.</p>
+    <div class="grid">
+      <div><label for="g-provider">Provider or facility</label><input id="g-provider" placeholder="Example: North Florida Surgery Center"></div>
+      <div><label for="g-estimate">Good Faith Estimate amount ($)</label><input id="g-estimate" type="number" min="0" step="0.01" placeholder="Example: 1800"></div>
+      <div><label for="g-bill">Final bill amount ($)</label><input id="g-bill" type="number" min="0" step="0.01" placeholder="Example: 2650"></div>
+      <div><label for="g-billdate">Date of the first bill</label><input id="g-billdate" type="date"></div>
+    </div>
+    <div class="btnrow"><button type="button" onclick="runGFE()">Check the gap</button></div>
+    <div id="gfe-result" class="result info"></div>
+  </div>
 
 <div class="card"><h2>Who can use this dispute</h2>
 <ul>
@@ -89,10 +126,43 @@ strong{color:var(--ink)}
 <li>Once the dispute is open, the provider must pause collections on the disputed amount.</li>
 <li>The provider cannot move the bill to collections or threaten to while the dispute runs.</li>
 </ul>
-<a class="cta" href="https://dueeasy.com/#gfe">Run the estimate checker</a></div>
+<a class="cta" href="#tool">Run the estimate checker</a></div>
+
+<div class="card"><h2>Keep going: the other free tools</h2><ul>
+<li><a href="appeal-letter-guide.html#tool">Appeal letter generator</a>: your claim or treatment was denied.</li>
+<li><a href="bill-vs-eob.html#tool">Bill vs EOB matcher</a>: the bill and the EOB do not agree.</li>
+<li><a href="hospital-financial-assistance.html#tool">Assistance checker</a>: paying would be a hardship.</li>
+<li><a href="good-faith-estimate-dispute.html#tool">Estimate dispute checker</a>: the bill beat your estimate by $400 or more.</li>
+<li><a href="medical-bill-negotiation.html#tool">Negotiation script generator</a>: the bill is right but too big.</li>
+<li><a href="https://dueeasy.com/#packet">Your action packet</a>: gather everything you built into one printable packet, with a deadline calendar file.</li>
+</ul></div>
 
 <div class="card"><h2>Related guides</h2><ul><li><a href="appeal-letter-guide.html">Appeal a denied claim</a></li><li><a href="hospital-financial-assistance.html">Hospital financial assistance</a></li><li><a href="bill-vs-eob.html">Bill vs. EOB matching</a></li><li><a href="surprise-bill-rights.html">Surprise bill rights</a></li><li><a href="medical-bill-negotiation.html">Negotiating a medical bill</a></li><li><a href="medical-bill-in-collections.html">Medical bill in collections</a></li><li><a href="how-to-fight-a-medical-bill.html">How to fight a medical bill</a></li><li><a href="how-to-read-an-eob.html">How to read an EOB</a></li><li><a href="medical-bill-payment-plan.html">Medical bill payment plans</a></li><li><a href="https://dueeasy.com/">The free DueEasy checker</a></li></ul></div>
 </div></main>
 <footer><div class="wrap">DueEasy is a free educational tool, not legal or medical advice. Rules and deadlines vary by plan and state, so confirm details in your denial letter and plan documents. <a href="https://dueeasy.com/privacy.html">Privacy policy</a>: nothing you type is sent anywhere. We count visits anonymously, counts only, never content.</div></footer>
+<script>
+var PACKET_DEADLINES={};
+function val(id){return document.getElementById(id).value.trim();}
+function countEvent(n){try{if(window.goatcounter&&window.goatcounter.count){window.goatcounter.count({path:n,event:true});}}catch(e){}}
+function fmtDate(iso){ if(!iso) return ""; var d=new Date(iso+"T12:00:00"); return d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); }
+function money(n){ return "$"+Number(n||0).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function toISODate(d){ var m=("0"+(d.getMonth()+1)).slice(-2); var day=("0"+d.getDate()).slice(-2); return d.getFullYear()+"-"+m+"-"+day; }
+function setDeadline(d,label){ try{ PACKET_DEADLINES[label]={iso:toISODate(d), text:d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"})}; }catch(e){} }
+function runGFE(){
+  var est=parseFloat(val("g-estimate")), bill=parseFloat(val("g-bill")), bd=val("g-billdate"), prov=val("g-provider")||"the provider";
+  var box=document.getElementById("gfe-result");
+  if(isNaN(est)||isNaN(bill)){ box.className="result warn show"; box.innerHTML="<b>Enter both amounts</b> so the gap can be checked."; return; }
+  var gap=bill-est;
+  if(gap<400){
+    box.className="result info show";
+    box.innerHTML="<b>Gap: "+money(gap)+".</b> That is under the $400 federal dispute threshold, so the federal patient provider dispute process generally does not apply on these numbers. You can still ask "+prov+" to explain every line above the estimate and request a hardship or prompt pay discount.";
+    return;
+  }
+  var deadline=""; var daysTxt="";
+  if(bd){ var d=new Date(bd+"T12:00:00"); d.setDate(d.getDate()+120); deadline=d.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"}); var today=new Date(); today.setHours(12,0,0,0); setDeadline(d,"Good Faith Estimate dispute deadline"); var days=Math.ceil((d-today)/86400000); daysTxt= days<0 ? " That date has passed on paper, so act today and ask about late filing for good cause." : " That is about "+days+" days from today. File early."; }
+  box.className="result good show";
+  box.innerHTML="<b>Gap: "+money(gap)+" above the estimate, which clears the $400 threshold.</b><br>Next steps: 1. Call "+prov+" billing and ask them to honor the estimate or explain the gap in writing. 2. If they will not fix it, start the federal patient provider dispute process. You generally have 120 days from the first bill."+(deadline?" Your 120 day target date: <b>"+deadline+"</b>."+daysTxt:"")+" 3. You will need the Good Faith Estimate, the itemized bill, and this first bill date. The No Surprises Help Desk, 1-800-985-3059, can walk you through filing. Filing costs a $25 federal fee. CMS calls it non refundable, but if the decision lowers your bill, the $25 comes off what you owe, so you get it back as a credit. Collections and late fees on the disputed amount must pause while the dispute is open.";
+}
+</script>
 </body>
 </html>
